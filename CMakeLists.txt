@@ -29,6 +29,10 @@ ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
 SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${TIMMI_LIB_VERSION} SOVERSION ${TIMMI_LIB_SOVERSION} )
 
+# build the testing application
+ADD_EXECUTABLE( timmitest_progressbar src/test.cxx )
+TARGET_LINK_LIBRARIES( timmitest_progressbar timmilicious )
+
 # define the install actions to perform
 INSTALL( TARGETS timmilicious DESTINATION lib )
 INSTALL_HEADERS_WITH_DIRECTORY( LIBTIMMI_HEADER_FILES )
