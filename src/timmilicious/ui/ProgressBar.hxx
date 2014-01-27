@@ -18,6 +18,8 @@ namespace timmilicious {
 				void setProgress( const float progress, bool refresh = false ) throw( std::range_error );
 
 			private:
+				unsigned short int getTerminalWidth( int fileDescriptor ) const throw( );
+
 				float mMaxProgress;
 				float mCurrentProgress;
 
