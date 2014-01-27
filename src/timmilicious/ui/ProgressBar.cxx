@@ -62,7 +62,7 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// draw the current progress
 	putchar( '[' );
-	for( int i = 0; i < 100; ++i ) {
+	for( int i = 0; i < 50; ++i ) {
 		putchar( '-' );
 	}
 	putchar( ']' );
