@@ -11,6 +11,9 @@ SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/Progress
 # generate a list of all header files of the library
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/ProgressBar.hxx )
 
+# add the include directories for building this library
+INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}/src" )
+
 # define a macro to install the header file properly
 MACRO(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
 FOREACH(HEADER ${${HEADER_LIST}})
