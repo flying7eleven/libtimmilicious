@@ -57,6 +57,9 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 void ProgressBar::updateProgress() throw( ) {
 	// TODO: delete the previous bar
 
+	//
+	const unsigned short int cols = this->getTerminalWidth( fileno( stdout ) );
+
 	// draw the current progress
 	putchar( '[' );
 	for( int i = 0; i < 100; ++i ) {
