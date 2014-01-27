@@ -66,4 +66,7 @@ void ProgressBar::updateProgress() throw( ) {
 		putchar( '-' );
 	}
 	putchar( ']' );
+
+	// print
+	fputs( "   0%\n", stdout );
 }
