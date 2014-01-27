@@ -1,4 +1,5 @@
 #include <timmilicious/ui/ProgressBar.hxx>
+#include <cstdio>
 using namespace timmilicious::ui;
 
 ProgressBar::ProgressBar() {
@@ -25,5 +26,12 @@ float ProgressBar::getProgress() const throw( ) {
 }
 
 void ProgressBar::updateProgress() throw( ) {
-	// TODO: refresh the rendering
+	// TODO: delete the previous bar
+
+	// draw the current progress
+	putchar( '[' );
+	for( int i = 0; i < 100; ++i ) {
+		putchar( '-' );
+	}
+	putchar( ']' );
 }
