@@ -55,6 +55,17 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 	return termwidth == 0 ? default_tty : termwidth;
 }
 
+void ProgressBar::setStatusText( const std::string & status ) throw( ) {
+	this->mStatusText = status;
+}
+
+void ProgressBar::setMaxProgress( const unsigned int max ) throw( std::range_error ) {
+	if( max < this->mCurrentProgress ) {
+		throw std::range_error( "The maximum value must be the same as the current progress or higher." );
+	}
+	this->mMaxProgress = max;
+}
+
 void ProgressBar::updateProgress() throw( ) {
 	// TODO: delete the previous bar
 
