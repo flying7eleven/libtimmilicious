@@ -5,8 +5,9 @@
 using namespace timmilicious::ui;
 
 ProgressBar::ProgressBar() {
-	this->mCurrentProgress = 0.0f;
-	this->mMaxProgress = 100.0f;
+	this->mCurrentProgress = 0;
+	this->mMaxProgress = 100;
+	this->mStatusText = "";
 }
 
 ProgressBar::~ProgressBar() {
