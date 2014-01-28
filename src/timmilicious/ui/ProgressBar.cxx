@@ -76,15 +76,19 @@ void ProgressBar::updateProgress() throw( ) {
 	// get the current number of columns for the active terminal
 	const unsigned short int terminalColumns = this->getTerminalWidth( fileno( stdout ) );
 
-	// calculate the current progress
+	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
+	const unsigned short int numberOfSpaces = terminalColumns - 50 - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / 2.0f );
+	const unsigned short int progressNotDone = 50 - progressDone;
+
+	// write the current progress as a number into a buffer
 	sprintf( percentBuffer, " % 4d%%", static_cast< int >( currentProgress ) );
 
 	// show the text for the current status the user has set
 	fputs( this->mStatusText.c_str(), stdout );
 
 	// put in as many spaces that the progress bar is right-aligned
-	const unsigned short int numberOfSpaces = terminalColumns - 50 - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
 	for( int i = 0; i < numberOfSpaces; ++i ) {
 		putchar( ' ' );
 	}
@@ -93,13 +97,11 @@ void ProgressBar::updateProgress() throw( ) {
 	putchar( '[' );
 
 	// put the markers for the already done work
-	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / 2.0f );
 	for( int i = 0; i < progressDone; ++i ) {
 		putchar( '#' );
 	}
 
 	// put the markers for the work not done
-	const unsigned short int progressNotDone = 50 - progressDone;
 	for( int i = 0; i < progressNotDone; ++i ) {
 		putchar( '-' );
 	}
