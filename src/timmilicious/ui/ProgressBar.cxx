@@ -13,8 +13,8 @@ ProgressBar::~ProgressBar() {
 	// nothing to do here
 }
 
-void ProgressBar::setProgress( const float progress, bool refresh ) throw( std::range_error ) {
-	if( progress > this->mMaxProgress || progress < 0.0f ) {
+void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
+	if( progress > this->mMaxProgress || progress < 0 ) {
 		throw std::range_error( "The new progress must be between 0.0 and the max. value of the progress." );
 	}
 	this->mCurrentProgress = progress;
@@ -23,7 +23,7 @@ void ProgressBar::setProgress( const float progress, bool refresh ) throw( std::
 	}
 }
 
-float ProgressBar::getProgress() const throw( ) {
+unsigned int ProgressBar::getProgress() const throw( ) {
 	return this->mCurrentProgress;
 }
 

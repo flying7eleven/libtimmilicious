@@ -14,14 +14,14 @@ namespace timmilicious {
 				virtual ~ProgressBar();
 
 				void updateProgress() throw( );
-				float getProgress() const throw( );
-				void setProgress( const float progress, bool refresh = false ) throw( std::range_error );
+				unsigned int getProgress() const throw( );
+				void setProgress( const unsigned int progress, bool refresh = false ) throw( std::range_error );
 
 			private:
 				unsigned short int getTerminalWidth( int fileDescriptor ) const throw( );
 
-				float mMaxProgress;
-				float mCurrentProgress;
+				unsigned int mMaxProgress;
+				unsigned int mCurrentProgress;
 
 		}; /* class ProgressBar */
 
