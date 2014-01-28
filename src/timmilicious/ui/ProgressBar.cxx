@@ -82,32 +82,36 @@ void ProgressBar::updateProgress() throw( ) {
 	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / 2.0f );
 	const unsigned short int progressNotDone = 50 - progressDone;
 
-	// write the current progress as a number into a buffer
-	sprintf( percentBuffer, " % 4d%%", static_cast< int >( currentProgress ) );
-
 	// show the text for the current status the user has set
 	fputs( this->mStatusText.c_str(), stdout );
 
-	// put in as many spaces that the progress bar is right-aligned
-	for( int i = 0; i < numberOfSpaces; ++i ) {
-		putchar( ' ' );
+	// write the current progress as a number into a buffer
+	sprintf( percentBuffer, " % 4d%%", static_cast< int >( currentProgress ) );
+
+	// just show the progress bar if we have enough room to do that
+	if( true ) {
+
+		// put in as many spaces that the progress bar is right-aligned
+		for( int i = 0; i < numberOfSpaces; ++i ) {
+			putchar( ' ' );
+		}
+
+		// indicate the start of the progress bar
+		putchar( '[' );
+
+		// put the markers for the already done work
+		for( int i = 0; i < progressDone; ++i ) {
+			putchar( '#' );
+		}
+
+		// put the markers for the work not done
+		for( int i = 0; i < progressNotDone; ++i ) {
+			putchar( '-' );
+		}
+
+		// indicate the end of the progress bar
+		putchar( ']' );
 	}
-
-	// indicate the start of the progress bar
-	putchar( '[' );
-
-	// put the markers for the already done work
-	for( int i = 0; i < progressDone; ++i ) {
-		putchar( '#' );
-	}
-
-	// put the markers for the work not done
-	for( int i = 0; i < progressNotDone; ++i ) {
-		putchar( '-' );
-	}
-
-	// indicate the end of the progress bar
-	putchar( ']' );
 
 	// print the current progress as number
 	fputs( percentBuffer, stdout );
