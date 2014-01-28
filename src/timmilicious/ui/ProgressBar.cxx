@@ -68,18 +68,41 @@ void ProgressBar::setMaxProgress( const unsigned int max ) throw( std::range_err
 }
 
 void ProgressBar::updateProgress() throw( ) {
-	// TODO: delete the previous bar
+	char percentBuffer[ 6 ];
 
-	//
-	const unsigned short int cols = this->getTerminalWidth( fileno( stdout ) );
+	// clear the percent buffer
+	memset( percentBuffer, 0, sizeof( char ) * 6 );
 
-	// draw the current progress
+	// get the current number of columns for the active terminal
+	const unsigned short int terminalColumns = this->getTerminalWidth( fileno( stdout ) );
+
+	// calculate the current progress
+	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
+	sprintf( percentBuffer, " % 4d%%", static_cast< int >( currentProgress ) );
+
+	// show the text for the current status the user has set
+	fputs( this->mStatusText.c_str(), stdout );
+
+	// put in as many spaces that the progress bar is right-aligned
+	const unsigned short int numberOfSpaces = terminalColumns - 50 - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	for( int i = 0; i < numberOfSpaces; ++i ) {
+		putchar( ' ' );
+	}
+
+	// indicate the start of the progress bar
 	putchar( '[' );
+
+	// put the markers for the already done work
+	// const unsigned short int progressDone =
+
 	for( int i = 0; i < 50; ++i ) {
 		putchar( '-' );
 	}
+
+	// indicate the end of the progress bar
 	putchar( ']' );
 
-	// print
-	fputs( "   0%\n", stdout );
+	// print the current progress as number
+	fputs( percentBuffer, stdout );
+	fputs( "\n", stdout );
 }
