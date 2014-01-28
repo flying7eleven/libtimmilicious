@@ -6,7 +6,11 @@ int main( int, char ** ) {
 
 	testBar->setStatusText( "Processing images..." );
 	testBar->setMaxProgress( 1000 );
-	testBar->setProgress( 0 );
+
+	for( int i = 0; i < 1000; ++i ) {
+		testBar->setProgress( i );
+		testBar->updateProgress();
+	}
 
 	delete testBar;
 	return 0;
