@@ -50,7 +50,7 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 		termwidth = win.ws_col;
 	}
 #endif
-	
+
 	//
 	return termwidth == 0 ? default_tty : termwidth;
 }
