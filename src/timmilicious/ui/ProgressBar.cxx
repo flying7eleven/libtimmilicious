@@ -41,7 +41,7 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 	//
 #if defined( TIOCGSIZE )
 	struct ttysize win;
-	if( ioctl( fd, TIOCGSIZE, &win ) == 0 ) {
+	if( ioctl( fileDescriptor, TIOCGSIZE, &win ) == 0 ) {
 		termwidth = win.ts_cols;
 	}
 #elif defined( TIOCGWINSZ )
