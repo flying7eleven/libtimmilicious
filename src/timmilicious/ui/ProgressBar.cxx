@@ -93,9 +93,14 @@ void ProgressBar::updateProgress() throw( ) {
 	putchar( '[' );
 
 	// put the markers for the already done work
-	// const unsigned short int progressDone =
+	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / 2.0f );
+	for( int i = 0; i < progressDone; ++i ) {
+		putchar( '#' );
+	}
 
-	for( int i = 0; i < 50; ++i ) {
+	// put the markers for the work not done
+	const unsigned short int progressNotDone = 50 - progressDone;
+	for( int i = 0; i < progressNotDone; ++i ) {
 		putchar( '-' );
 	}
 
