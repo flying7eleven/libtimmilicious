@@ -1,16 +1,17 @@
 #include <timmilicious/ui/ProgressBar.hxx>
 #include <cstdio>
+#include <cstring> // memset
 #include <unistd.h>
 #include <sys/ioctl.h>
 using namespace timmilicious::ui;
 
-ProgressBar::ProgressBar() {
+ProgressBar::ProgressBar() throw( ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
 	this->mStatusText = "";
 }
 
-ProgressBar::~ProgressBar() {
+ProgressBar::~ProgressBar() throw( ) {
 	// nothing to do here
 }
 

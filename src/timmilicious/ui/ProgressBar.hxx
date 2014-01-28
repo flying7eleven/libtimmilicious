@@ -11,8 +11,8 @@ namespace timmilicious {
 
 		class ProgressBar {
 			public:
-				ProgressBar();
-				virtual ~ProgressBar();
+				ProgressBar() throw( );
+				virtual ~ProgressBar() throw( );
 
 				void setStatusText( const std::string & status ) throw( );
 				void updateProgress() throw( );
