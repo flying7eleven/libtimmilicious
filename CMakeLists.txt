@@ -5,6 +5,9 @@ PROJECT( libTimmilicious )
 SET( TIMMI_LIB_VERSION "1.0.0" )
 SET( TIMMI_LIB_SOVERSION "1" ) # should just be changed if the ABI changes
 
+# find and configure the required libraries
+FIND_PACKAGE( Boost COMPONENTS thread REQUIRED )
+
 # generate a list of all source files of the library
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/ProgressBar.cxx )
 
@@ -13,6 +16,7 @@ SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/Progress
 
 # add the include directories for building this library
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}/src" )
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # define a macro to install the header file properly
 MACRO(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
@@ -27,6 +31,7 @@ ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
 
 # specify how to build the library
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
+TARGET_LINK_LIBRARIES( timmilicious ${Boost_LIBRARIES} )
 SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${TIMMI_LIB_VERSION} SOVERSION ${TIMMI_LIB_SOVERSION} )
 
 # build the testing application
