@@ -100,12 +100,12 @@ void ProgressBar::updateProgress() throw( ) {
 		putchar( '[' );
 
 		// put the markers for the already done work
-		for( int i = 0; i < progressDone; ++i ) {
+		for( unsigned short int i = 0; i < progressDone; ++i ) {
 			putchar( '#' );
 		}
 
 		// put the markers for the work not done
-		for( int i = 0; i < progressNotDone; ++i ) {
+		for( unsigned short int i = 0; i < progressNotDone; ++i ) {
 			putchar( '-' );
 		}
 
