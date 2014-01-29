@@ -8,8 +8,8 @@ int main( int, char ** ) {
 	testBar->setStatusText( "Processing images..." );
 	testBar->setMaxProgress( 1000 );
 
-	for( int i = 0; i <= 1000; ++i ) {
-		testBar->setProgress( i );
+	for( int i = 0; i < 1000; ++i ) {
+		testBar->increaseProgress();
 		testBar->updateProgress();
 		usleep( 600 );
 	}
