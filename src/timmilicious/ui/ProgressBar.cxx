@@ -29,6 +29,16 @@ unsigned int ProgressBar::getProgress() const throw( ) {
 	return this->mCurrentProgress;
 }
 
+void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw( std::range_error ) {
+	if( val + this->mCurrentProgress > this->mMaxProgress ) {
+		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
+	}
+	this->mCurrentProgress += val;
+	if( refresh ) {
+		this->updateProgress();
+	}
+}
+
 unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const throw( ) {
 	const unsigned short default_tty = 80;
 	const unsigned short default_notty = 0;

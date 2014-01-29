@@ -59,6 +59,16 @@ namespace timmilicious {
 				void setProgress( const unsigned int progress, bool refresh = false ) throw( std::range_error );
 
 				/**
+				 * Increases the current progress value by a value.
+				 *
+				 * \param[in] val The value to increase the progress value by.
+				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
+				 *
+				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 */
+				void increaseProgress( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
+
+				/**
 				 * Set the maximum value for the progress.
 				 *
 				 * \param[in] max The new max. progress value.
