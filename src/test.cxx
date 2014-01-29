@@ -1,4 +1,5 @@
 #include <timmilicious/ui/ProgressBar.hxx>
+#include <unistd.h>
 using namespace timmilicious::ui;
 
 int main( int, char ** ) {
@@ -10,6 +11,7 @@ int main( int, char ** ) {
 	for( int i = 0; i <= 1000; ++i ) {
 		testBar->setProgress( i );
 		testBar->updateProgress();
+		usleep( 600 );
 	}
 
 	delete testBar;
