@@ -115,5 +115,6 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// print the current progress as number
 	fputs( percentBuffer, stdout );
-	fputs( "\n", stdout );
+	fputs( "\r", stdout );
+	fflush( stdout );
 }
