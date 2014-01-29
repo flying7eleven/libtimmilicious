@@ -4,6 +4,7 @@
 // include the required headers
 #include <stdexcept>
 #include <string>
+#include <boost/thread/mutex.hpp>
 
 namespace timmilicious {
 
@@ -98,6 +99,7 @@ namespace timmilicious {
 				std::string mStatusText; // <<< The current status text to use.
 				unsigned int mMaxProgress; // <<< The currently set max. progress value.
 				unsigned int mCurrentProgress; // <<< The current progress value.
+				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
 
 		}; /* class ProgressBar */
 

@@ -1,4 +1,5 @@
 #include <timmilicious/ui/ProgressBar.hxx>
+#include <boost/thread/lock_guard.hpp>
 #include <cstdio>
 #include <cstring> // memset
 #include <unistd.h>
@@ -16,6 +17,8 @@ ProgressBar::~ProgressBar() throw( ) {
 }
 
 void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
+	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
+
 	if( progress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -30,6 +33,8 @@ unsigned int ProgressBar::getProgress() const throw( ) {
 }
 
 void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw( std::range_error ) {
+	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
+
 	if( val + this->mCurrentProgress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
