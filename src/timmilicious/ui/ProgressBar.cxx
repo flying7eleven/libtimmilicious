@@ -102,7 +102,7 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
-	const unsigned short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	const unsigned short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
 	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
 	const unsigned short int progressNotDone = this->mProgressBarWidth - progressDone;
 
@@ -110,7 +110,7 @@ void ProgressBar::updateProgress() throw( ) {
 	fputs( this->mStatusText.c_str(), stdout );
 
 	// write the current progress as a number into a buffer
-	sprintf( percentBuffer, " % 4d%%", static_cast< int >( currentProgress ) );
+	sprintf( percentBuffer, "% 4d%%", static_cast< int >( currentProgress ) );
 
 	// just show the progress bar if we have enough room to do that
 	if( true ) {
