@@ -9,6 +9,7 @@ using namespace timmilicious::ui;
 ProgressBar::ProgressBar() throw( ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
+	this->mProgressBarWidth = 50;
 	this->mStatusText = "";
 }
 
@@ -101,9 +102,9 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
-	const unsigned short int numberOfSpaces = terminalColumns - 50 - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
-	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / 2.0f );
-	const unsigned short int progressNotDone = 50 - progressDone;
+	const unsigned short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 6 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
+	const unsigned short int progressNotDone = this->mProgressBarWidth - progressDone;
 
 	// show the text for the current status the user has set
 	fputs( this->mStatusText.c_str(), stdout );

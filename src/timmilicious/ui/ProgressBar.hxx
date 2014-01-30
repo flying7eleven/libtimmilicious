@@ -137,6 +137,7 @@ namespace timmilicious {
 				std::string mStatusText; // <<< The current status text to use.
 				unsigned int mMaxProgress; // <<< The currently set max. progress value.
 				unsigned int mCurrentProgress; // <<< The current progress value.
+				unsigned short int mProgressBarWidth; // <<< The size of the progress indiciator.
 				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
 
 		}; /* class ProgressBar */
