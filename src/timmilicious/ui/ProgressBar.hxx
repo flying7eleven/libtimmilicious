@@ -31,11 +31,15 @@ namespace timmilicious {
 				 * Set the status text for the progress indicator.
 				 *
 				 * \param[in] status The text to display.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				void setStatusText( const std::string & status ) throw( );
 
 				/**
 				 * Redraw the progress line with the current state of the progress bar.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				void updateProgress() throw( );
 
@@ -46,6 +50,8 @@ namespace timmilicious {
 				 * its the value stored by setProgress(...).
 				 *
 				 * \return The value for the current process.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				unsigned int getProgress() const throw( );
 
@@ -56,8 +62,33 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 *
+				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
 				void setProgress( const unsigned int progress, bool refresh = false ) throw( std::range_error );
+
+				/**
+				 * Set the current progress.
+				 *
+				 * \param[in] progress The progress to set.
+				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
+				 *
+				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 *
+				 * \remarks This is a thread-safe implementation.
+				 */
+				void setProgressTS( const unsigned int progress, bool refresh = false ) throw( std::range_error );
+				/**
+				 * Increases the current progress value by a value.
+				 *
+				 * \param[in] val The value to increase the progress value by.
+				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
+				 *
+				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 *
+				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
+				 */
+				void increaseProgress( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
 
 				/**
 				 * Increases the current progress value by a value.
@@ -66,15 +97,18 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 *
+				 * \remarks This is a thread-safe implementation.
 				 */
-				void increaseProgress( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
-
+				void increaseProgressTS( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
 				/**
 				 * Set the maximum value for the progress.
 				 *
 				 * \param[in] max The new max. progress value.
 				 *
 				 * \throws std::range_error Will be thrown if the new maximum value is lower than the current progress value.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				void setMaxProgress( const unsigned int max ) throw( std::range_error );
 
@@ -82,6 +116,8 @@ namespace timmilicious {
 				 * Get the current max. progress value.
 				 *
 				 * \return The current max. progress value.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				unsigned int getMaxProgress() const throw( );
 
@@ -93,6 +129,8 @@ namespace timmilicious {
 				 * \param[in] fileDesciptor The file descriptor of the terminal to query.
 				 *
 				 * \return The width (in character counts) for the specified terminal.
+				 *
+				 * \warning The method is *NOT* thread-safe.
 				 */
 				unsigned short int getTerminalWidth( int fileDescriptor ) const throw( );
 

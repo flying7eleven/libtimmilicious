@@ -17,8 +17,6 @@ ProgressBar::~ProgressBar() throw( ) {
 }
 
 void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
-	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
-
 	if( progress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -28,13 +26,17 @@ void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw
 	}
 }
 
+void ProgressBar::setProgressTS( const unsigned int progress, bool refresh ) throw( std::range_error ) {
+	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
+
+	this->setProgress( progress, refresh );
+}
+
 unsigned int ProgressBar::getProgress() const throw( ) {
 	return this->mCurrentProgress;
 }
 
 void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw( std::range_error ) {
-	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
-
 	if( val + this->mCurrentProgress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -42,6 +44,12 @@ void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw
 	if( refresh ) {
 		this->updateProgress();
 	}
+}
+
+void ProgressBar::increaseProgressTS( const unsigned int val, bool refresh ) throw( std::range_error ) {
+	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
+
+	this->increaseProgress( val, refresh );
 }
 
 unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const throw( ) {
