@@ -6,10 +6,10 @@
 #include <sys/ioctl.h>
 using namespace timmilicious::ui;
 
-ProgressBar::ProgressBar() throw( ) {
+ProgressBar::ProgressBar( unsigned short int progressBarWidth ) throw( ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
-	this->mProgressBarWidth = 50;
+	this->mProgressBarWidth = progressBarWidth;
 	this->mStatusText = "";
 }
 

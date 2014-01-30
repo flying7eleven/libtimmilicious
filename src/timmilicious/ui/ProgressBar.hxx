@@ -19,8 +19,10 @@ namespace timmilicious {
 			public:
 				/**
 				 * \brief Default constructor of this class.
+				 *
+				 * \param[in] progressBarWidth The width of the progress bar in columns.
 				 */
-				ProgressBar() throw( );
+				ProgressBar( unsigned short int progressBarWidth = 50 ) throw( );
 
 				/**
 				 * \brief Default destructor of this class.
