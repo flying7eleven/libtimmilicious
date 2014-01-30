@@ -43,5 +43,5 @@ TARGET_LINK_LIBRARIES( timmitest_progressbar timmilicious )
 
 # define the install actions to perform
 INSTALL( TARGETS timmilicious DESTINATION lib )
-INSTALL( FILES FindTimilicious.cmake DESTINATION ${CMAKE_MODULES_INSTALL_DIR} )
+INSTALL( FILES FindTimmilicious.cmake DESTINATION ${CMAKE_MODULES_INSTALL_DIR} )
 INSTALL_HEADERS_WITH_DIRECTORY( LIBTIMMI_HEADER_FILES )
