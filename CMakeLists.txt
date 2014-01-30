@@ -14,6 +14,9 @@ SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/Progress
 # generate a list of all header files of the library
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/ProgressBar.hxx )
 
+#
+SET(CMAKE_MODULES_INSTALL_DIR ${CMAKE_ROOT}/Modules CACHE FILEPATH "Find script and CMake Config file will be installed to this directory")
+
 # add the include directories for building this library
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}/src" )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
@@ -40,4 +43,5 @@ TARGET_LINK_LIBRARIES( timmitest_progressbar timmilicious )
 
 # define the install actions to perform
 INSTALL( TARGETS timmilicious DESTINATION lib )
+INSTALL( FILES FindTimilicious.cmake DESTINATION ${CMAKE_MODULES_INSTALL_DIR} )
 INSTALL_HEADERS_WITH_DIRECTORY( LIBTIMMI_HEADER_FILES )
