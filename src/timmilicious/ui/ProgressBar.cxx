@@ -102,7 +102,7 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
-	const unsigned short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	const short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
 	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
 	const unsigned short int progressNotDone = this->mProgressBarWidth - progressDone;
 
