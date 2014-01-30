@@ -136,6 +136,20 @@ void ProgressBar::updateProgress() throw( ) {
 		// indicate the end of the progress bar
 		putchar( ']' );
 	}
+	// since there is not enough room for the progress bar, right-align the progress indicator instead
+	else {
+		const short int numberOfSpaces2 = terminalColumns - 5 - this->mStatusText.length(); // number pct - status len
+
+		// if there is even not enough room for that, throw an exception
+		if( numberOfSpaces2 < 0 ) {
+			throw std::exception();
+		}
+
+		// put in as many spaces that the progress number is right-aligned
+		for( short int i = 0; i < numberOfSpaces2; ++i ) {
+			putchar( ' ' );
+		}
+	}
 
 	// print the current progress as number
 	fputs( percentBuffer, stdout );
