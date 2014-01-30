@@ -113,7 +113,7 @@ void ProgressBar::updateProgress() throw( ) {
 	sprintf( percentBuffer, "% 4d%%", static_cast< int >( currentProgress ) );
 
 	// just show the progress bar if we have enough room to do that
-	if( true ) {
+	if( numberOfSpaces > 0 ) {
 
 		// put in as many spaces that the progress bar is right-aligned
 		for( short int i = 0; i < numberOfSpaces; ++i ) {
