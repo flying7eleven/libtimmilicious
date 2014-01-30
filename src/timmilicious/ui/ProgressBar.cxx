@@ -139,6 +139,10 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// print the current progress as number
 	fputs( percentBuffer, stdout );
-	fputs( "\r", stdout );
+	if( this->mCurrentProgress == this->mMaxProgress ) {
+		fputs( "\n", stdout );
+	} else {
+		fputs( "\r", stdout );
+	}
 	fflush( stdout );
 }
