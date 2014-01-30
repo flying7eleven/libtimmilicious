@@ -116,7 +116,7 @@ void ProgressBar::updateProgress() throw( ) {
 	if( true ) {
 
 		// put in as many spaces that the progress bar is right-aligned
-		for( int i = 0; i < numberOfSpaces; ++i ) {
+		for( short int i = 0; i < numberOfSpaces; ++i ) {
 			putchar( ' ' );
 		}
 
