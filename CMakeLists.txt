@@ -9,6 +9,7 @@ SET( TIMMI_LIB_SOVERSION "1" ) # should just be changed if the ABI changes
 FIND_PACKAGE( Boost COMPONENTS system thread REQUIRED )
 
 # generate a list of all source files of the library
+SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/ProgressBar.cxx )
 
 # generate a list of all header files of the library
@@ -32,6 +33,9 @@ FOREACH(HEADER ${${HEADER_LIST}})
     INSTALL(FILES ${HEADER} DESTINATION include/${DIR})
 ENDFOREACH(HEADER)
 ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
+
+#
+CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/src/timmilicious/timmilicious.cxx.in" "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
 
 # specify how to build the library
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
