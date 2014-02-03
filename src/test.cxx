@@ -11,7 +11,7 @@ int main( int, char ** ) {
 	for( int i = 0; i < 1000; ++i ) {
 		testBar->increaseProgress();
 		testBar->updateProgress();
-		usleep( 600 );
+		usleep( 10000 );
 	}
 
 	delete testBar;
