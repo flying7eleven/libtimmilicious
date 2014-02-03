@@ -96,7 +96,7 @@ void ProgressBar::setMaxProgress( const unsigned int max ) throw( std::range_err
 	this->mMaxProgress = max;
 }
 
-void ProgressBar::updateProgress() throw( ) {
+void ProgressBar::updateProgress() throw( std::length_error ) {
 	char percentBuffer[ 6 ];
 
 	// clear the percent buffer
@@ -159,7 +159,7 @@ void ProgressBar::updateProgress() throw( ) {
 
 		// if there is even not enough room for that, throw an exception
 		if( numberOfSpaces2 < 0 ) {
-			throw std::exception();
+			throw std::length_error( "There is not enough space to show any kind of progress indicator." );
 		}
 
 		// put in as many spaces that the progress number is right-aligned

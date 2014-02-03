@@ -41,9 +41,11 @@ namespace timmilicious {
 				/**
 				 * Redraw the progress line with the current state of the progress bar.
 				 *
+				 * \throws std::length_error Will be thrown if the space for showing any kind of the progress indicator is to small.
+				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void updateProgress() throw( );
+				void updateProgress() throw( std::length_error );
 
 				/**
 				 * Get the current progress.
