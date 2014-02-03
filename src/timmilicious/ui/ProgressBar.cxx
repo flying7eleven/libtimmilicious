@@ -11,6 +11,7 @@ ProgressBar::ProgressBar( unsigned short int progressBarWidth ) throw( ) {
 	this->mMaxProgress = 100;
 	this->mProgressBarWidth = progressBarWidth;
 	this->mStatusText = "";
+	this->mShowTimeEstimation = false;
 }
 
 ProgressBar::~ProgressBar() throw( ) {

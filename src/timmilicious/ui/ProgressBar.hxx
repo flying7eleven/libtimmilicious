@@ -141,6 +141,7 @@ namespace timmilicious {
 				unsigned int mCurrentProgress; // <<< The current progress value.
 				unsigned short int mProgressBarWidth; // <<< The size of the progress indiciator.
 				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
+				bool mShowTimeEstimation; // <<< Should the time estimation be shown?
 
 		}; /* class ProgressBar */
 
