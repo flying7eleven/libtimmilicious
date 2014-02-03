@@ -7,6 +7,7 @@ int main( int, char ** ) {
 
 	testBar->setStatusText( "Processing images..." );
 	testBar->setMaxProgress( 1000 );
+	testBar->showTimeEstimation( true );
 
 	for( int i = 0; i < 1000; ++i ) {
 		testBar->increaseProgress();
