@@ -123,6 +123,15 @@ namespace timmilicious {
 				 */
 				unsigned int getMaxProgress() const throw( );
 
+				/**
+				 * Specify if the time estimation should be displayed or not.
+				 *
+				 * \param[in] show True if the time estimation should be displayed, false if not.
+				 *
+				 * \warning The method is *NOT* thread-safe.
+				 */
+				void showTimeEstimation( const bool & show ) throw( );
+
 			private:
 
 				/**

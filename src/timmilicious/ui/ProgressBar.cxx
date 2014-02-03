@@ -18,6 +18,10 @@ ProgressBar::~ProgressBar() throw( ) {
 	// nothing to do here
 }
 
+void ProgressBar::showTimeEstimation( const bool & show ) throw( ) {
+	this->mShowTimeEstimation = show;
+}
+
 void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
 	if( progress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
