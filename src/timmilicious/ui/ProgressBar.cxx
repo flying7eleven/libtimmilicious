@@ -103,7 +103,8 @@ void ProgressBar::updateProgress() throw( ) {
 
 	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
-	const short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length(); // progress indicator - bar indicator - number pct - status len
+	const unsigned short int timingColumns = this->mShowTimeEstimation ? 6 : 0;
+	const short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length() - timingColumns; // progress indicator - bar indicator - number pct - status len
 	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
 	const unsigned short int progressNotDone = this->mProgressBarWidth - progressDone;
 
@@ -114,11 +115,22 @@ void ProgressBar::updateProgress() throw( ) {
 	sprintf( percentBuffer, "% 4d%%", static_cast< int >( currentProgress ) );
 
 	// just show the progress bar if we have enough room to do that
-	if( numberOfSpaces > 0 ) {
+	if( ( numberOfSpaces + timingColumns ) > 0 ) {
 
 		// put in as many spaces that the progress bar is right-aligned
 		for( short int i = 0; i < numberOfSpaces; ++i ) {
 			putchar( ' ' );
+		}
+
+		// if the time estimation should be displayed (and there is enough space), show it here
+		if( this->mShowTimeEstimation && numberOfSpaces > 0 ) {
+			fputs( "--:-- ", stdout ); // TODO: just a temporary placeholder
+		}
+		// if the estimaton should be displayed, but there is not enough room, print the missing spaces instead
+		else if( this->mShowTimeEstimation ) {
+			for( unsigned short int i = 0; i < ( numberOfSpaces + timingColumns ); ++i ) {
+				putchar( ' ' );
+			}
 		}
 
 		// indicate the start of the progress bar
