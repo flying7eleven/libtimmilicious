@@ -131,7 +131,8 @@ namespace timmilicious {
 				 *
 				 * \param[in] show True if the time estimation should be displayed, false if not.
 				 *
-				 * \warning The method is *NOT* thread-safe.
+				 * \warning The method is *NOT* thread-safe. Therefore, timings shown while this
+				 *          option is on are *NOT* correct.
 				 */
 				void showTimeEstimation( const bool & show ) throw( );
 
