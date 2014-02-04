@@ -47,10 +47,13 @@ void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw
 	if( val + this->mCurrentProgress > this->mMaxProgress ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
+	this->mProgressTimer.stop();
+	this->mTimePerElementRequired = this->mProgressTimer.elapsed(); // TODO: do a better estimation
 	this->mCurrentProgress += val;
 	if( refresh ) {
 		this->updateProgress();
 	}
+	this->mProgressTimer.start();
 }
 
 void ProgressBar::increaseProgressTS( const unsigned int val, bool refresh ) throw( std::range_error ) {
