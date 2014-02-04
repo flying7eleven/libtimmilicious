@@ -1,0 +1,31 @@
+# Maintainer: Tim Hütz <tim[at]huetz[dot]biz>
+pkgname=libtimmilicious
+pkgver=1.0.0
+pkgrel=1
+pkgdesc=""
+url="https://github.com/thuetz/libtimmilicious"
+arch=('x86_64' 'i686')
+license=('GPL3')
+depends=('boost')
+optdepends=()
+makedepends=('cmake')
+conflicts=()
+replaces=()
+backup=()
+install='libtimmilicious.install'
+source=("https://github.com/thuetz/${pkgname}/archive/${pkgver}.tar.gz")
+sha256sums=('a22fab151898cea141979a3e5be8628a8766e5f8d9920a3d78b21073859fc77e')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  cmake ./ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
