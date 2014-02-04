@@ -134,8 +134,10 @@ void ProgressBar::updateProgress() throw( std::length_error ) {
 		if( this->mShowTimeEstimation && numberOfSpaces > 0 ) {
 			if( this->mTimePerElementRequired.wall > 0.0 ) {
 				boost::timer::nanosecond_type const oneSecond( 1 * 1000000000LL );
-				const double secondsRemaining = ( this->mTimePerElementRequired.wall * static_cast< double >( this->mMaxProgress - this->mCurrentProgress ) ) / oneSecond;
-				fprintf( stdout, "--:%02d ", static_cast< int >( secondsRemaining + 0.5 ) );
+				double secondsRemaining = ( this->mTimePerElementRequired.wall * static_cast< double >( this->mMaxProgress - this->mCurrentProgress ) ) / oneSecond;
+				const unsigned short int minutesRemaining = static_cast< unsigned short int >( secondsRemaining / 60.0 );
+				secondsRemaining -= 60.0 * minutesRemaining;
+				fprintf( stdout, "%02d:%02d ", minutesRemaining, static_cast< int >( secondsRemaining + 0.5 ) );
 			} else {
 				fputs( "--:-- ", stdout );
 			}
