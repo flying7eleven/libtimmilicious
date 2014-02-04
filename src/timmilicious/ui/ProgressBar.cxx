@@ -12,6 +12,7 @@ ProgressBar::ProgressBar( unsigned short int progressBarWidth ) throw( ) {
 	this->mProgressBarWidth = progressBarWidth;
 	this->mStatusText = "";
 	this->mShowTimeEstimation = false;
+	this->mTimePerElementRequired.clear();
 }
 
 ProgressBar::~ProgressBar() throw( ) {

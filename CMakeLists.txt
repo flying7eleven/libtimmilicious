@@ -6,7 +6,7 @@ SET( TIMMI_LIB_VERSION "1.0.0" )
 SET( TIMMI_LIB_SOVERSION "1" ) # should just be changed if the ABI changes
 
 # find and configure the required libraries
-FIND_PACKAGE( Boost COMPONENTS system thread REQUIRED )
+FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 
 # generate a list of all source files of the library
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
