@@ -132,7 +132,13 @@ void ProgressBar::updateProgress() throw( std::length_error ) {
 
 		// if the time estimation should be displayed (and there is enough space), show it here
 		if( this->mShowTimeEstimation && numberOfSpaces > 0 ) {
-			fputs( "--:-- ", stdout ); // TODO: just a temporary placeholder
+			if( this->mTimePerElementRequired.wall > 0.0 ) {
+				boost::timer::nanosecond_type const oneSecond( 1 * 1000000000LL );
+				const double secondsRemaining = ( this->mTimePerElementRequired.wall * static_cast< double >( this->mMaxProgress - this->mCurrentProgress ) ) / oneSecond;
+				fprintf( stdout, "--:%02d ", static_cast< int >( secondsRemaining + 0.5 ) );
+			} else {
+				fputs( "--:-- ", stdout );
+			}
 		}
 		// if the estimaton should be displayed, but there is not enough room, print the missing spaces instead
 		else if( this->mShowTimeEstimation ) {
