@@ -16,6 +16,11 @@ SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/Progress
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/timmilicious.hxx )
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/ProgressBar.hxx )
 
+# set flags to get clean code (at least on UNIX platforms)
+IF( UNIX OR CMAKE_COMPILER_IS_GNUCXX )
+	SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+ENDIF()
+
 #
 SET(CMAKE_MODULES_INSTALL_DIR ${CMAKE_ROOT}/Modules CACHE FILEPATH "Find script and CMake Config file will be installed to this directory")
 
