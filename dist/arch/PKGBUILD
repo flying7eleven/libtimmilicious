@@ -14,7 +14,7 @@ replaces=()
 backup=()
 install='libtimmilicious.install'
 source=("https://github.com/thuetz/${pkgname}/archive/v${pkgver}.tar.gz")
-sha256sums=('c8febf62d1add9a1d3308eddc568601ab7ecc614fd28060f72bd148242285b07')
+sha256sums=('07eb7e5ee242f4528fb9a843c3a375901121303e4a86515b29ff5ca3856b822a')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
