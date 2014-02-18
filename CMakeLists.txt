@@ -18,7 +18,11 @@ SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/Progress
 
 # set flags to get clean code (at least on UNIX platforms)
 IF( UNIX OR CMAKE_COMPILER_IS_GNUCXX )
-	SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	IF( CMAKE_COMPILER_IS_GNUCXX )
+		SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	ELSE()
+		SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	ENDIF()
 ENDIF()
 
 #
