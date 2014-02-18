@@ -27,7 +27,7 @@ namespace timmilicious {
 	 *
 	 * \warning The method is *NOT* thread-safe.
 	 */
-	const unsigned short int getABIVersion();
+	unsigned short int getABIVersion();
 
 	/**
 	 * Get the API verison of the library.

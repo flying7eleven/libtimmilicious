@@ -17,7 +17,7 @@
  */
 #include <timmilicious/timmilicious.hxx>
 
-const unsigned short int timmilicious::getABIVersion() {
+unsigned short int timmilicious::getABIVersion() {
 	return @TIMMI_LIB_SOVERSION@;
 }
 
