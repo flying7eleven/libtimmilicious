@@ -23,11 +23,11 @@
 #include <sys/ioctl.h>
 using namespace timmilicious::ui;
 
-ProgressBar::ProgressBar( unsigned short int progressBarWidth ) throw( ) {
+ProgressBar::ProgressBar( const std::string & statusText, unsigned short int progressBarWidth ) throw( ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
 	this->mProgressBarWidth = progressBarWidth;
-	this->mStatusText = "";
+	this->mStatusText = statusText;
 	this->mShowTimeEstimation = false;
 	this->mTimePerElementRequired.clear();
 }

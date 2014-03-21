@@ -38,9 +38,10 @@ namespace timmilicious {
 				/**
 				 * \brief Default constructor of this class.
 				 *
+				 * \param[in] statusText The text which describes the status of the progress bar.
 				 * \param[in] progressBarWidth The width of the progress bar in columns.
 				 */
-				ProgressBar( unsigned short int progressBarWidth = 50 ) throw( );
+				ProgressBar( const std::string & statusText = "", unsigned short int progressBarWidth = 50 ) throw( );
 
 				/**
 				 * \brief Default destructor of this class.
