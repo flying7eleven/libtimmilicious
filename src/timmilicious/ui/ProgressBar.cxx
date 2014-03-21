@@ -30,6 +30,11 @@ ProgressBar::ProgressBar( const std::string & statusText, unsigned short int pro
 	this->mStatusText = statusText;
 	this->mShowTimeEstimation = false;
 	this->mTimePerElementRequired.clear();
+
+	// show the current status automatically, just if a pre-defined status text was set
+	if( this->mStatusText.length() > 0 ) {
+		this->updateProgress();
+	}
 }
 
 ProgressBar::~ProgressBar() throw( ) {
