@@ -2,8 +2,8 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )
 PROJECT( libTimmilicious )
 
 # set the current verison of the library
-SET( TIMMI_LIB_VERSION "1.0.2" )
-SET( TIMMI_LIB_SOVERSION "1" ) # should just be changed if the ABI changes
+SET( TIMMI_LIB_VERSION "1.1.0" )
+SET( TIMMI_LIB_SOVERSION "2" ) # should just be changed if the ABI changes
 
 # find and configure the required libraries
 FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
