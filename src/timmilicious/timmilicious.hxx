@@ -18,6 +18,26 @@
 #if !defined( __TIMMILICIOUS_TIMMILICIOUS_HXX__ )
 	#define __TIMMILICIOUS_TIMMILICIOUS_HXX__
 
+/**
+ * Use this macro for if-branches which are likely to be entered. This helps the branch prediction to optimize
+ * the code and therefore the speed of the execution.
+ */
+#if !defined( likely )
+	#define likely( x ) __builtin_expect( !!( x ), 1 )
+#else
+	#error "It seems that the likely(x) marcro was defined previously. Check that before using libTimmilicous!"
+#endif
+
+/**
+ * Use this macro for if-branches which are unlikely to be entered. This helps the branch prediction to optimize
+ * the code and therefore the speed of the execution.
+ */
+#if !defined( unlikely )
+	#define unlikely( x ) __builtin_expect( !!( x ), 0 )
+#else
+	#error "It seems that the unlikely(x) marcro was defined previously. Check that before using libTimmilicous!"
+#endif
+
 namespace timmilicious {
 
 	/**
