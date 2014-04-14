@@ -11,10 +11,12 @@ FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 # generate a list of all source files of the library
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/ProgressBar.cxx )
+SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/io/HDF5.cxx )
 
 # generate a list of all header files of the library
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/timmilicious.hxx )
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/ProgressBar.hxx )
+SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/io/HDF5.hxx )
 
 # set flags to get clean code (at least on UNIX platforms)
 IF( UNIX OR CMAKE_COMPILER_IS_GNUCXX )
