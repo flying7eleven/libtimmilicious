@@ -15,12 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see {http://www.gnu.org/licenses/}.
  */
+#include <timmilicious/timmilicious.hxx>
 #include <timmilicious/ui/ProgressBar.hxx>
 #include <boost/thread/lock_guard.hpp>
 #include <cstdio>
 #include <cstring> // memset
 #include <unistd.h>
 #include <sys/ioctl.h>
+
 using namespace timmilicious::ui;
 
 ProgressBar::ProgressBar( const std::string & statusText, unsigned short int progressBarWidth ) throw( ) {
