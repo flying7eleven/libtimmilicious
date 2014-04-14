@@ -46,7 +46,7 @@ void ProgressBar::showTimeEstimation( const bool & show ) throw( ) {
 }
 
 void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
-	if( progress > this->mMaxProgress ) {
+	if( unlikely( progress > this->mMaxProgress ) ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
 	this->mCurrentProgress = progress;
@@ -66,7 +66,7 @@ unsigned int ProgressBar::getProgress() const throw( ) {
 }
 
 void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw( std::range_error ) {
-	if( val + this->mCurrentProgress > this->mMaxProgress ) {
+	if( unlikely( val + this->mCurrentProgress > this->mMaxProgress ) ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
 	this->mProgressTimer.stop();
@@ -90,7 +90,7 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 	unsigned short termwidth = 0;
 
 	//
-	if( !isatty( fileDescriptor ) ) {
+	if( unlikely( !isatty( fileDescriptor ) ) ) {
 		return default_notty;
 	}
 
@@ -102,7 +102,7 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 	}
 #elif defined( TIOCGWINSZ )
 	struct winsize win;
-	if( ioctl( fileDescriptor, TIOCGWINSZ, &win ) == 0 ) {
+	if( likely( ioctl( fileDescriptor, TIOCGWINSZ, &win ) == 0 ) ) {
 		termwidth = win.ws_col;
 	}
 #endif
@@ -116,7 +116,7 @@ void ProgressBar::setStatusText( const std::string & status ) throw( ) {
 }
 
 void ProgressBar::setMaxProgress( const unsigned int max ) throw( std::range_error ) {
-	if( max < this->mCurrentProgress ) {
+	if( unlikely( max < this->mCurrentProgress ) ) {
 		throw std::range_error( "The maximum value must be the same as the current progress or higher." );
 	}
 	this->mMaxProgress = max;
@@ -192,7 +192,7 @@ void ProgressBar::updateProgress() throw( std::length_error ) {
 		const short int numberOfSpaces2 = terminalColumns - 5 - this->mStatusText.length(); // number pct - status len
 
 		// if there is even not enough room for that, throw an exception
-		if( numberOfSpaces2 < 0 ) {
+		if( unlikely( numberOfSpaces2 < 0 ) ) {
 			throw std::length_error( "There is not enough space to show any kind of progress indicator." );
 		}
 
@@ -204,7 +204,7 @@ void ProgressBar::updateProgress() throw( std::length_error ) {
 
 	// print the current progress as number
 	fputs( percentBuffer, stdout );
-	if( this->mCurrentProgress == this->mMaxProgress ) {
+	if( unlikely( this->mCurrentProgress == this->mMaxProgress ) ) {
 		fputs( "\n", stdout );
 	} else {
 		fputs( "\r", stdout );
