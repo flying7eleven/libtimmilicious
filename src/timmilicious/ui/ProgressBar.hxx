@@ -40,8 +40,10 @@ namespace timmilicious {
 				 *
 				 * \param[in] statusText The text which describes the status of the progress bar.
 				 * \param[in] progressBarWidth The width of the progress bar in columns.
+				 *
+				 * \throws std::invalid_argument Will be thrown if the progressBarWidth parameter is negative.
 				 */
-				ProgressBar( const std::string & statusText = "", unsigned short int progressBarWidth = 50 ) throw( );
+				ProgressBar( const std::string & statusText = "", unsigned short int progressBarWidth = 50 ) throw( std::invalid_argument );
 
 				/**
 				 * \brief Default destructor of this class.
