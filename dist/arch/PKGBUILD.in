@@ -1,6 +1,6 @@
 # Maintainer: Tim Hütz <tim[at]huetz[dot]biz>
 pkgname=libtimmilicious
-pkgver=1.1.0
+pkgver=@VERSION_SHORT@
 pkgrel=1
 pkgdesc=""
 url="https://github.com/thuetz/libtimmilicious"
