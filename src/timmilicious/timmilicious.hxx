@@ -23,7 +23,11 @@
  * the code and therefore the speed of the execution.
  */
 #if !defined( likely )
-	#define likely( x ) __builtin_expect( !!( x ), 1 )
+	#if defined( __GNUC__ )
+		#define likely( x ) __builtin_expect( !!( x ), 1 )
+	#else
+		#define likely( x ) x
+	#endif
 #else
 	#error "It seems that the likely(x) marcro was defined previously. Check that before using libTimmilicous!"
 #endif
@@ -33,7 +37,11 @@
  * the code and therefore the speed of the execution.
  */
 #if !defined( unlikely )
-	#define unlikely( x ) __builtin_expect( !!( x ), 0 )
+	#if defined( __GNUC__ )
+		#define unlikely( x ) __builtin_expect( !!( x ), 0 )
+	#else
+		#define unlikely( x ) x
+	#endif
 #else
 	#error "It seems that the unlikely(x) marcro was defined previously. Check that before using libTimmilicous!"
 #endif
