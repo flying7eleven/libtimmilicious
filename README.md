@@ -1,3 +1,6 @@
 libTimmilicious
 ===============
-A simple library for beautifying your console applications with colos and progress indicators.
+This is a simple library with some helper classes for my work. It provides classes for different aspects such as:
+
+- console ui
+- input/output helpers
