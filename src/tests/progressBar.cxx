@@ -64,10 +64,32 @@ TEST( ProgressBar, setMaxProgress ) {
 	ASSERT_NO_THROW( progress.setMaxProgress( 10 ) ); // max. progress is the same as the current progress (100% finished)
 }
 
+TEST( ProgressBar, increaseProgress ) {
+	ProgressBar progress;
+
+	ASSERT_NO_THROW( progress.increaseProgress( 1, false ) );
+	ASSERT_EQ( 1, progress.getProgress() );
+	ASSERT_NO_THROW( progress.increaseProgress( 10, false ) );
+	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgress( 100, false ), std::range_error );
+	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgress( -1, false ), std::invalid_argument );
+	ASSERT_EQ( 11, progress.getProgress() );
+}
+
+TEST( ProgressBar, increaseProgressTS ) {
+	ProgressBar progress;
+
+	ASSERT_NO_THROW( progress.increaseProgressTS( 1, false ) );
+	ASSERT_EQ( 1, progress.getProgress() );
+	ASSERT_NO_THROW( progress.increaseProgressTS( 10, false ) );
+	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgressTS( 100, false ), std::range_error );
+	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgressTS( -1, false ), std::invalid_argument );
+	ASSERT_EQ( 11, progress.getProgress() );
+}
+
 TEST( ProgressBar, showTimeEstimation ) {}
 
 TEST( ProgressBar, updateProgress ) {}
-
-TEST( ProgressBar, increaseProgress ) {}
-
-TEST( ProgressBar, increaseProgressTS ) {}
