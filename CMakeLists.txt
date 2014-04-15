@@ -14,6 +14,8 @@ FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 option( BUILD_TESTS "" OFF )
 if( BUILD_TESTS )
 	find_package( GTest REQUIRED )
+	add_executable( test_progressBar src/tests/progressBar.cxx )
+	target_link_libraries( test_progressBar timmilicious ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARY} )
 endif( BUILD_TESTS )
 
 #
