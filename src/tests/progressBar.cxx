@@ -90,6 +90,15 @@ TEST( ProgressBar, increaseProgressTS ) {
 	ASSERT_EQ( 11, progress.getProgress() );
 }
 
-TEST( ProgressBar, showTimeEstimation ) {}
+TEST( ProgressBar, showTimeEstimation ) {
+	ProgressBar progress;
 
-TEST( ProgressBar, updateProgress ) {}
+	ASSERT_NO_THROW( progress.showTimeEstimation( true ) );
+	ASSERT_NO_THROW( progress.showTimeEstimation( false ) );
+}
+
+TEST( ProgressBar, updateProgress ) {
+	ProgressBar progress;
+
+	ASSERT_NO_THROW( progress.updateProgress() );
+}
