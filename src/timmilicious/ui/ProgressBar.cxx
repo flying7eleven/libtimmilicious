@@ -25,7 +25,7 @@
 
 using namespace timmilicious::ui;
 
-ProgressBar::ProgressBar( const std::string & statusText, unsigned short int progressBarWidth ) throw( std::invalid_argument ) {
+ProgressBar::ProgressBar( const std::string & statusText, short int progressBarWidth ) throw( std::invalid_argument ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
 	this->mProgressBarWidth = progressBarWidth;

@@ -43,7 +43,7 @@ namespace timmilicious {
 				 *
 				 * \throws std::invalid_argument Will be thrown if the progressBarWidth parameter is negative.
 				 */
-				ProgressBar( const std::string & statusText = "", unsigned short int progressBarWidth = 50 ) throw( std::invalid_argument );
+				ProgressBar( const std::string & statusText = "", short int progressBarWidth = 50 ) throw( std::invalid_argument );
 
 				/**
 				 * \brief Default destructor of this class.
@@ -172,7 +172,7 @@ namespace timmilicious {
 				std::string mStatusText; // <<< The current status text to use.
 				unsigned int mMaxProgress; // <<< The currently set max. progress value.
 				unsigned int mCurrentProgress; // <<< The current progress value.
-				unsigned short int mProgressBarWidth; // <<< The size of the progress indiciator.
+				short int mProgressBarWidth; // <<< The size of the progress indiciator.
 				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
 				bool mShowTimeEstimation; // <<< Should the time estimation be shown?
 				boost::timer::cpu_timer mProgressTimer; // <<< A timer used for estimating the runtime.
