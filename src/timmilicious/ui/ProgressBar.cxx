@@ -91,6 +91,10 @@ void ProgressBar::increaseProgressTS( const unsigned int val, bool refresh ) thr
 	this->increaseProgress( val, refresh );
 }
 
+unsigned int ProgressBar::getMaxProgress() const throw( ) {
+	return this->mMaxProgress;
+}
+
 unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const throw( ) {
 	const unsigned short default_tty = 80;
 	const unsigned short default_notty = 0;
