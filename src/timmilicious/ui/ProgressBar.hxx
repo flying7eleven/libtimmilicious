@@ -87,10 +87,11 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 * \throws std::invalid_argument Will be thrown if the progress value is less than zero.
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void setProgress( const int progress, bool refresh = false ) throw( std::range_error );
+				void setProgress( const int progress, bool refresh = false ) throw( std::range_error, std::invalid_argument );
 
 				/**
 				 * Set the current progress.
@@ -99,10 +100,11 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 * \throws std::invalid_argument Will be thrown if the progress value is less than zero.
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void setProgressTS( const int progress, bool refresh = false ) throw( std::range_error );
+				void setProgressTS( const int progress, bool refresh = false ) throw( std::range_error, std::invalid_argument );
 				/**
 				 * Increases the current progress value by a value.
 				 *
@@ -132,10 +134,11 @@ namespace timmilicious {
 				 * \param[in] max The new max. progress value.
 				 *
 				 * \throws std::range_error Will be thrown if the new maximum value is lower than the current progress value.
+				 * \throws std::invalid_argument Will be thrown if max. value for the progress bar should be zero or less.
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void setMaxProgress( const int max ) throw( std::range_error );
+				void setMaxProgress( const int max ) throw( std::range_error, std::invalid_argument );
 
 				/**
 				 * Get the current max. progress value.
