@@ -22,5 +22,9 @@ unsigned short int timmilicious::getABIVersion() {
 }
 
 const char *timmilicious::getAPIVersion() {
-	return "@TIMMI_LIB_VERSION@";
+	return "@VERSION@";
+}
+
+const char *timmilicious::getShortAPIVersion() {
+	return "@VERSION_SHORT@";
 }
