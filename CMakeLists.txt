@@ -78,7 +78,7 @@ SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${VERSION_SHORT} SOVERSIO
 
 # build the testing application
 if( BUILD_EXAMPLES )
-	add_executable( timmitest_progressbar src/test.cxx )
+	add_executable( timmitest_progressbar src/examples/progressBar.cxx )
 	target_link_libraries( timmitest_progressbar timmilicious )
 endif( BUILD_EXAMPLES )
 
