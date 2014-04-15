@@ -2,7 +2,6 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )
 PROJECT( libTimmilicious )
 
 # set the current verison of the library
-SET( TIMMI_LIB_VERSION "1.1.0" )
 SET( TIMMI_LIB_SOVERSION "2" ) # should just be changed if the ABI changes
 
 # setup the path where CMake should search for Find*.cmake scripts
@@ -66,7 +65,7 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/dist/arch/PKGBUILD.in" "${PROJECT_SOURCE_
 # specify how to build the library
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
 TARGET_LINK_LIBRARIES( timmilicious ${Boost_LIBRARIES} )
-SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${TIMMI_LIB_VERSION} SOVERSION ${TIMMI_LIB_SOVERSION} )
+SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${VERSION_SHORT} SOVERSION ${TIMMI_LIB_SOVERSION} )
 
 # build the testing application
 ADD_EXECUTABLE( timmitest_progressbar src/test.cxx )
