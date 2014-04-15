@@ -166,7 +166,7 @@ void ProgressBar::updateProgress() throw( std::length_error ) {
 				fputs( "--:-- ", stdout );
 			}
 		}
-		// if the estimaton should be displayed, but there is not enough room, print the missing spaces instead
+		// if the estimation should be displayed, but there is not enough room, print the missing spaces instead
 		else if( this->mShowTimeEstimation ) {
 			for( unsigned short int i = 0; i < ( numberOfSpaces + timingColumns ); ++i ) {
 				putchar( ' ' );
