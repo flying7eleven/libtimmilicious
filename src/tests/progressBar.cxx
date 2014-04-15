@@ -73,6 +73,8 @@ TEST( ProgressBar, increaseProgress ) {
 	ASSERT_EQ( 11, progress.getProgress() );
 	ASSERT_THROW( progress.increaseProgress( 100, false ), std::range_error );
 	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgress( 0, false ), std::invalid_argument );
+	ASSERT_EQ( 11, progress.getProgress() );
 	ASSERT_THROW( progress.increaseProgress( -1, false ), std::invalid_argument );
 	ASSERT_EQ( 11, progress.getProgress() );
 }
@@ -85,6 +87,8 @@ TEST( ProgressBar, increaseProgressTS ) {
 	ASSERT_NO_THROW( progress.increaseProgressTS( 10, false ) );
 	ASSERT_EQ( 11, progress.getProgress() );
 	ASSERT_THROW( progress.increaseProgressTS( 100, false ), std::range_error );
+	ASSERT_EQ( 11, progress.getProgress() );
+	ASSERT_THROW( progress.increaseProgressTS( 0, false ), std::invalid_argument );
 	ASSERT_EQ( 11, progress.getProgress() );
 	ASSERT_THROW( progress.increaseProgressTS( -1, false ), std::invalid_argument );
 	ASSERT_EQ( 11, progress.getProgress() );
