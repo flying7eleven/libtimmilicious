@@ -58,13 +58,39 @@ namespace timmilicious {
 	unsigned short int getABIVersion();
 
 	/**
-	 * Get the API verison of the library.
+	 * Get the API version of the library.
+	 *
+	 * The last release of the library was version 1.0.0 but you are using a dev.
+	 * version of the library which has some new features implemented. The full
+	 * version would look like "1.0.0-14-g3fe", which means that there were 14
+	 * code changes since the last release. In this case, this method would
+	 * return "1.0.0-14-g3fe". For release versions the return value is the same
+	 * as returned in \ref timmilicious::getShortAPIVersion.
 	 *
 	 * \returns The API version for the library.
 	 *
 	 * \warning The method is *NOT* thread-safe.
 	 */
 	const char *getAPIVersion();
+
+	/**
+	 * Get the (short) API version of the library.
+	 *
+	 * Most of the times this is enough to query. The returned string will contain
+	 * just the major minor and patch version of the library but not the drift
+	 * from the last version number. For example:
+	 *
+	 * The last release of the library was version 1.0.0 but you are using a dev.
+	 * version of the library which has some new features implemented. The full
+	 * version would look like "1.0.0-14-g3fe", which means that there were 14
+	 * code changes since the last release. In this case, this method would
+	 * return "1.0.0".
+	 *
+	 * \returns The API version for the library.
+	 *
+	 * \warning The method is *NOT* thread-safe.
+	 */
+	const char *getShortAPIVersion();
 
 } /* namespace timmilicious*/
 
