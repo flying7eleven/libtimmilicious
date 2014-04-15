@@ -5,6 +5,9 @@ PROJECT( libTimmilicious )
 SET( TIMMI_LIB_VERSION "1.1.0" )
 SET( TIMMI_LIB_SOVERSION "2" ) # should just be changed if the ABI changes
 
+# setup the path where CMake should search for Find*.cmake scripts
+SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake" )
+
 # find and configure the required libraries
 FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 
@@ -33,6 +36,17 @@ SET(CMAKE_MODULES_INSTALL_DIR ${CMAKE_ROOT}/Modules CACHE FILEPATH "Find script 
 # add the include directories for building this library
 INCLUDE_DIRECTORIES( "${CMAKE_CURRENT_SOURCE_DIR}/src" )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+
+# make a version file containing the current version from git.
+include(GetGitRevisionDescription)
+git_describe(VERSION "--tags")
+
+# parse the version information into pieces.
+string(REGEX REPLACE "^v([0-9]+)\\..*" "\\1" VERSION_MAJOR "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.([0-9]+).*" "\\1" VERSION_MINOR "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" VERSION_PATCH "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+(.*)" "\\1" VERSION_SHA1 "${VERSION}")
+set(VERSION_SHORT "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 # define a macro to install the header file properly
 MACRO(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
