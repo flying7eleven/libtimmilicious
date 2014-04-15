@@ -52,7 +52,7 @@ void ProgressBar::showTimeEstimation( const bool & show ) throw( ) {
 	this->mShowTimeEstimation = show;
 }
 
-void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw( std::range_error ) {
+void ProgressBar::setProgress( const int progress, bool refresh ) throw( std::range_error ) {
 	if( unlikely( progress > this->mMaxProgress ) ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -62,7 +62,7 @@ void ProgressBar::setProgress( const unsigned int progress, bool refresh ) throw
 	}
 }
 
-void ProgressBar::setProgressTS( const unsigned int progress, bool refresh ) throw( std::range_error ) {
+void ProgressBar::setProgressTS( const int progress, bool refresh ) throw( std::range_error ) {
 	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
 
 	this->setProgress( progress, refresh );
@@ -72,7 +72,7 @@ unsigned int ProgressBar::getProgress() const throw( ) {
 	return this->mCurrentProgress;
 }
 
-void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw( std::range_error ) {
+void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::range_error ) {
 	if( unlikely( val + this->mCurrentProgress > this->mMaxProgress ) ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -85,7 +85,7 @@ void ProgressBar::increaseProgress( const unsigned int val, bool refresh ) throw
 	this->mProgressTimer.start();
 }
 
-void ProgressBar::increaseProgressTS( const unsigned int val, bool refresh ) throw( std::range_error ) {
+void ProgressBar::increaseProgressTS( const int val, bool refresh ) throw( std::range_error ) {
 	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
 
 	this->increaseProgress( val, refresh );
@@ -126,7 +126,7 @@ void ProgressBar::setStatusText( const std::string & status ) throw( ) {
 	this->mStatusText = status;
 }
 
-void ProgressBar::setMaxProgress( const unsigned int max ) throw( std::range_error ) {
+void ProgressBar::setMaxProgress( const int max ) throw( std::range_error ) {
 	if( unlikely( max < this->mCurrentProgress ) ) {
 		throw std::range_error( "The maximum value must be the same as the current progress or higher." );
 	}

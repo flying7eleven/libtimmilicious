@@ -90,7 +90,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void setProgress( const unsigned int progress, bool refresh = false ) throw( std::range_error );
+				void setProgress( const int progress, bool refresh = false ) throw( std::range_error );
 
 				/**
 				 * Set the current progress.
@@ -102,7 +102,7 @@ namespace timmilicious {
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void setProgressTS( const unsigned int progress, bool refresh = false ) throw( std::range_error );
+				void setProgressTS( const int progress, bool refresh = false ) throw( std::range_error );
 				/**
 				 * Increases the current progress value by a value.
 				 *
@@ -113,7 +113,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void increaseProgress( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
+				void increaseProgress( const int val = 1, bool refresh = false ) throw( std::range_error );
 
 				/**
 				 * Increases the current progress value by a value.
@@ -125,7 +125,7 @@ namespace timmilicious {
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void increaseProgressTS( const unsigned int val = 1, bool refresh = false ) throw( std::range_error );
+				void increaseProgressTS( const int val = 1, bool refresh = false ) throw( std::range_error );
 				/**
 				 * Set the maximum value for the progress.
 				 *
@@ -135,7 +135,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void setMaxProgress( const unsigned int max ) throw( std::range_error );
+				void setMaxProgress( const int max ) throw( std::range_error );
 
 				/**
 				 * Get the current max. progress value.
@@ -170,8 +170,8 @@ namespace timmilicious {
 				unsigned short int getTerminalWidth( int fileDescriptor ) const throw( );
 
 				std::string mStatusText; // <<< The current status text to use.
-				unsigned int mMaxProgress; // <<< The currently set max. progress value.
-				unsigned int mCurrentProgress; // <<< The current progress value.
+				int mMaxProgress; // <<< The currently set max. progress value.
+				int mCurrentProgress; // <<< The current progress value.
 				short int mProgressBarWidth; // <<< The size of the progress indiciator.
 				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
 				bool mShowTimeEstimation; // <<< Should the time estimation be shown?
