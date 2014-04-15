@@ -10,6 +10,15 @@ SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake" )
 # find and configure the required libraries
 FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 
+#
+option( BUILD_TESTS "" OFF )
+if( BUILD_TESTS )
+	find_package( GTest REQUIRED )
+endif( BUILD_TESTS )
+
+#
+option( BUILD_EXAMPLES "" OFF )
+
 # generate a list of all source files of the library
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
 SET( LIBTIMMI_SOURCE_FILES ${LIBTIMMI_SOURCE_FILES} src/timmilicious/ui/ProgressBar.cxx )
@@ -68,8 +77,10 @@ TARGET_LINK_LIBRARIES( timmilicious ${Boost_LIBRARIES} )
 SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${VERSION_SHORT} SOVERSION ${TIMMI_LIB_SOVERSION} )
 
 # build the testing application
-ADD_EXECUTABLE( timmitest_progressbar src/test.cxx )
-TARGET_LINK_LIBRARIES( timmitest_progressbar timmilicious )
+if( BUILD_EXAMPLES )
+	add_executable( timmitest_progressbar src/test.cxx )
+	target_link_libraries( timmitest_progressbar timmilicious )
+endif( BUILD_EXAMPLES )
 
 # define the install actions to perform
 INSTALL( TARGETS timmilicious DESTINATION lib )
