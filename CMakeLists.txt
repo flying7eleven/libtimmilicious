@@ -61,6 +61,7 @@ ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
 
 #
 CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/src/timmilicious/timmilicious.cxx.in" "${PROJECT_BINARY_DIR}/timmilicious.cxx" )
+CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/dist/arch/PKGBUILD.in" "${PROJECT_SOURCE_DIR}/dist/arch/PKGBUILD" )
 
 # specify how to build the library
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
