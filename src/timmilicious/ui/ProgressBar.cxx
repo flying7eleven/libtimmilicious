@@ -75,7 +75,10 @@ unsigned int ProgressBar::getProgress() const throw( ) {
 	return this->mCurrentProgress;
 }
 
-void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::range_error ) {
+void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::range_error, std::invalid_argument ) {
+	if( unlikely( val < 1 ) ) {
+		throw std::invalid_argument( "The increment value has to been 1 or higher." );
+	}
 	if( unlikely( val + this->mCurrentProgress > this->mMaxProgress ) ) {
 		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
 	}
@@ -88,7 +91,7 @@ void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::ra
 	this->mProgressTimer.start();
 }
 
-void ProgressBar::increaseProgressTS( const int val, bool refresh ) throw( std::range_error ) {
+void ProgressBar::increaseProgressTS( const int val, bool refresh ) throw( std::range_error, std::invalid_argument ) {
 	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
 
 	this->increaseProgress( val, refresh );

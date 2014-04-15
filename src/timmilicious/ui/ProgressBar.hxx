@@ -112,10 +112,11 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 * \throws std::invalid_argument Will be thrown if value is set to an negative value or zero.
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void increaseProgress( const int val = 1, bool refresh = false ) throw( std::range_error );
+				void increaseProgress( const int val = 1, bool refresh = false ) throw( std::range_error, std::invalid_argument );
 
 				/**
 				 * Increases the current progress value by a value.
@@ -124,10 +125,11 @@ namespace timmilicious {
 				 * \param[in] refresh If set to true, the progress bar will be redrawn automatically, if false nothing will be done.
 				 *
 				 * \throws std::range_error Will be thrown if the value is higher than the max. value for the progress.
+				 * \throws std::invalid_argument Will be thrown if value is set to an negative value or zero.
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void increaseProgressTS( const int val = 1, bool refresh = false ) throw( std::range_error );
+				void increaseProgressTS( const int val = 1, bool refresh = false ) throw( std::range_error, std::invalid_argument );
 				/**
 				 * Set the maximum value for the progress.
 				 *
