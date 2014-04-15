@@ -80,7 +80,7 @@ void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::ra
 		throw std::invalid_argument( "The increment value has to been 1 or higher." );
 	}
 	if( unlikely( val + this->mCurrentProgress > this->mMaxProgress ) ) {
-		throw std::range_error( "The new progress must be between 0 and the max. value of the progress." );
+		throw std::range_error( "The new progress must be between 0 and the max. value of the progress. It seems that the max. value gets exceeded." );
 	}
 	this->mProgressTimer.stop();
 	this->mTimePerElementRequired = this->mProgressTimer.elapsed(); // TODO: do a better estimation
