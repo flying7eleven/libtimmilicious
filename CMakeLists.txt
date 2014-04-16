@@ -32,13 +32,13 @@ SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/ui/Progress
 SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/io/HDF5.hxx )
 
 # set flags to get clean code (at least on UNIX platforms)
-IF( UNIX OR CMAKE_COMPILER_IS_GNUCXX )
-	IF( CMAKE_COMPILER_IS_GNUCXX )
-		SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
-	ELSE()
-		SET( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
-	ENDIF()
-ENDIF()
+if( "${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" )
+	set( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+elseif ( "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
+	set( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -Weverything -pedantic-errors -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+else()
+	message( FATAL_ERROR "You are using a non-supported compiler!" )
+endif()
 
 #
 SET(CMAKE_MODULES_INSTALL_DIR ${CMAKE_ROOT}/Modules CACHE FILEPATH "Find script and CMake Config file will be installed to this directory")
