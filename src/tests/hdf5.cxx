@@ -30,6 +30,18 @@ TEST( HDF5, Constructor ) {
 	ASSERT_NO_THROW( HDF5( HDF5_TEST_FILE_PATH, true ) );
 }
 
-TEST( HDF5, groupExists ) {}
+TEST( HDF5, createGroup ) {
+	HDF5 file( HDF5_TEST_FILE_PATH, true );
 
-TEST( HDF5, createGroup ) {}
+	ASSERT_THROW( file.createGroup( "/" ), std::invalid_argument ); // the root is always available and should not be created
+	ASSERT_NO_THROW( file.createGroup( "/short/path" ) );
+	ASSERT_NO_THROW( file.createGroup( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" ) );
+}
+
+TEST( HDF5, groupExists ) {
+	HDF5 file( HDF5_TEST_FILE_PATH, true );
+
+	ASSERT_EQ( true, file.groupExists( "/" ) ); // the root is always available
+	ASSERT_EQ( false, file.groupExists( "/short/path" ) );
+	ASSERT_EQ( false, file.groupExists( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" ) );
+}
