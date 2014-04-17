@@ -71,7 +71,7 @@ void ProgressBar::setProgressTS( const int progress, bool refresh ) noexcept( fa
 	this->setProgress( progress, refresh );
 }
 
-unsigned int ProgressBar::getProgress() const noexcept {
+int ProgressBar::getProgress() const noexcept {
 	return this->mCurrentProgress;
 }
 
@@ -97,7 +97,7 @@ void ProgressBar::increaseProgressTS( const int val, bool refresh ) noexcept( fa
 	this->increaseProgress( val, refresh );
 }
 
-unsigned int ProgressBar::getMaxProgress() const noexcept {
+int ProgressBar::getMaxProgress() const noexcept {
 	return this->mMaxProgress;
 }
 

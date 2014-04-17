@@ -78,7 +78,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				unsigned int getProgress() const noexcept;
+				int getProgress() const noexcept;
 
 				/**
 				 * Set the current progress.
@@ -149,7 +149,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				unsigned int getMaxProgress() const noexcept;
+				int getMaxProgress() const noexcept;
 
 				/**
 				 * Specify if the time estimation should be displayed or not.
