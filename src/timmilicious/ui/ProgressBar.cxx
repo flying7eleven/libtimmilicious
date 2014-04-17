@@ -132,7 +132,7 @@ void ProgressBar::setStatusText( const std::string & status ) noexcept {
 	this->mStatusText = status;
 }
 
-void ProgressBar::setMaxProgress( const int max ) throw( std::range_error, std::invalid_argument ) {
+void ProgressBar::setMaxProgress( const int max ) noexcept( false ) {
 	if( unlikely( max < 1 ) ) {
 		throw std::invalid_argument( "The maximum value must be at least 1." );
 	}
