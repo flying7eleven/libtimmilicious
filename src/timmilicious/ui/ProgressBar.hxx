@@ -43,12 +43,12 @@ namespace timmilicious {
 				 *
 				 * \throws std::invalid_argument Will be thrown if the progressBarWidth parameter is negative.
 				 */
-				ProgressBar( const std::string & statusText = "", short int progressBarWidth = 50 ) throw( std::invalid_argument );
+				ProgressBar( const std::string & statusText = "", short int progressBarWidth = 50 ) noexcept( false );
 
 				/**
 				 * \brief Default destructor of this class.
 				 */
-				virtual ~ProgressBar() throw( );
+				virtual ~ProgressBar() noexcept;
 
 				/**
 				 * Set the status text for the progress indicator.
@@ -57,7 +57,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void setStatusText( const std::string & status ) throw( );
+				void setStatusText( const std::string & status ) noexcept;
 
 				/**
 				 * Redraw the progress line with the current state of the progress bar.
@@ -66,7 +66,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void updateProgress() throw( std::length_error );
+				void updateProgress() noexcept( false );
 
 				/**
 				 * Get the current progress.
@@ -78,7 +78,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				unsigned int getProgress() const throw( );
+				unsigned int getProgress() const noexcept;
 
 				/**
 				 * Set the current progress.
@@ -91,7 +91,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void setProgress( const int progress, bool refresh = false ) throw( std::range_error, std::invalid_argument );
+				void setProgress( const int progress, bool refresh = false ) noexcept( false );
 
 				/**
 				 * Set the current progress.
@@ -104,7 +104,7 @@ namespace timmilicious {
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void setProgressTS( const int progress, bool refresh = false ) throw( std::range_error, std::invalid_argument );
+				void setProgressTS( const int progress, bool refresh = false ) noexcept( false );
 				/**
 				 * Increases the current progress value by a value.
 				 *
@@ -116,7 +116,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe. Use the method with the TS prefix instead.
 				 */
-				void increaseProgress( const int val = 1, bool refresh = false ) throw( std::range_error, std::invalid_argument );
+				void increaseProgress( const int val = 1, bool refresh = false ) noexcept( false );
 
 				/**
 				 * Increases the current progress value by a value.
@@ -129,7 +129,7 @@ namespace timmilicious {
 				 *
 				 * \remarks This is a thread-safe implementation.
 				 */
-				void increaseProgressTS( const int val = 1, bool refresh = false ) throw( std::range_error, std::invalid_argument );
+				void increaseProgressTS( const int val = 1, bool refresh = false ) noexcept( false );
 				/**
 				 * Set the maximum value for the progress.
 				 *
@@ -140,7 +140,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				void setMaxProgress( const int max ) throw( std::range_error, std::invalid_argument );
+				void setMaxProgress( const int max ) noexcept( false );
 
 				/**
 				 * Get the current max. progress value.
@@ -149,7 +149,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				unsigned int getMaxProgress() const throw( );
+				unsigned int getMaxProgress() const noexcept;
 
 				/**
 				 * Specify if the time estimation should be displayed or not.
@@ -159,7 +159,7 @@ namespace timmilicious {
 				 * \warning The method is *NOT* thread-safe. Therefore, timings shown while this
 				 *          option is on are *NOT* correct.
 				 */
-				void showTimeEstimation( const bool & show ) throw( );
+				void showTimeEstimation( const bool & show ) noexcept;
 
 			private:
 
@@ -172,7 +172,7 @@ namespace timmilicious {
 				 *
 				 * \warning The method is *NOT* thread-safe.
 				 */
-				unsigned short int getTerminalWidth( int fileDescriptor ) const throw( );
+				unsigned short int getTerminalWidth( int fileDescriptor ) const noexcept;
 
 				std::string mStatusText; // <<< The current status text to use.
 				int mMaxProgress; // <<< The currently set max. progress value.

@@ -25,7 +25,7 @@
 
 using namespace timmilicious::ui;
 
-ProgressBar::ProgressBar( const std::string & statusText, short int progressBarWidth ) throw( std::invalid_argument ) {
+ProgressBar::ProgressBar( const std::string & statusText, short int progressBarWidth ) noexcept( false ) {
 	this->mCurrentProgress = 0;
 	this->mMaxProgress = 100;
 	this->mProgressBarWidth = progressBarWidth;
@@ -44,15 +44,15 @@ ProgressBar::ProgressBar( const std::string & statusText, short int progressBarW
 	}
 }
 
-ProgressBar::~ProgressBar() throw( ) {
+ProgressBar::~ProgressBar() noexcept {
 	// nothing to do here
 }
 
-void ProgressBar::showTimeEstimation( const bool & show ) throw( ) {
+void ProgressBar::showTimeEstimation( const bool & show ) noexcept {
 	this->mShowTimeEstimation = show;
 }
 
-void ProgressBar::setProgress( const int progress, bool refresh ) throw( std::range_error, std::invalid_argument ) {
+void ProgressBar::setProgress( const int progress, bool refresh ) noexcept( false ) {
 	if( unlikely( progress < 0 ) ) {
 		throw std::invalid_argument( "The progress cannot be less than zero." );
 	}
@@ -65,17 +65,17 @@ void ProgressBar::setProgress( const int progress, bool refresh ) throw( std::ra
 	}
 }
 
-void ProgressBar::setProgressTS( const int progress, bool refresh ) throw( std::range_error, std::invalid_argument ) {
+void ProgressBar::setProgressTS( const int progress, bool refresh ) noexcept( false ) {
 	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
 
 	this->setProgress( progress, refresh );
 }
 
-unsigned int ProgressBar::getProgress() const throw( ) {
+unsigned int ProgressBar::getProgress() const noexcept {
 	return this->mCurrentProgress;
 }
 
-void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::range_error, std::invalid_argument ) {
+void ProgressBar::increaseProgress( const int val, bool refresh ) noexcept( false ) {
 	if( unlikely( val < 1 ) ) {
 		throw std::invalid_argument( "The increment value has to been 1 or higher." );
 	}
@@ -91,17 +91,17 @@ void ProgressBar::increaseProgress( const int val, bool refresh ) throw( std::ra
 	this->mProgressTimer.start();
 }
 
-void ProgressBar::increaseProgressTS( const int val, bool refresh ) throw( std::range_error, std::invalid_argument ) {
+void ProgressBar::increaseProgressTS( const int val, bool refresh ) noexcept( false ) {
 	boost::lock_guard< boost::mutex > guard( this->mCurrentProgressValueMutex );
 
 	this->increaseProgress( val, refresh );
 }
 
-unsigned int ProgressBar::getMaxProgress() const throw( ) {
+unsigned int ProgressBar::getMaxProgress() const noexcept {
 	return this->mMaxProgress;
 }
 
-unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const throw( ) {
+unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const noexcept {
 	const unsigned short default_tty = 80;
 	const unsigned short default_notty = 0;
 	unsigned short termwidth = 0;
@@ -128,7 +128,7 @@ unsigned short int ProgressBar::getTerminalWidth( int fileDescriptor ) const thr
 	return termwidth == 0 ? default_tty : termwidth;
 }
 
-void ProgressBar::setStatusText( const std::string & status ) throw( ) {
+void ProgressBar::setStatusText( const std::string & status ) noexcept {
 	this->mStatusText = status;
 }
 
@@ -142,7 +142,7 @@ void ProgressBar::setMaxProgress( const int max ) throw( std::range_error, std::
 	this->mMaxProgress = max;
 }
 
-void ProgressBar::updateProgress() throw( std::length_error ) {
+void ProgressBar::updateProgress() noexcept( false ) {
 	char percentBuffer[ 6 ];
 
 	// clear the percent buffer
