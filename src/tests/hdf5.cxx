@@ -44,4 +44,11 @@ TEST( HDF5, groupExists ) {
 	ASSERT_EQ( true, file.groupExists( "/" ) ); // the root is always available
 	ASSERT_EQ( false, file.groupExists( "/short/path" ) );
 	ASSERT_EQ( false, file.groupExists( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" ) );
+
+	file.createGroup( "/short/path" );
+	file.createGroup( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" );
+
+	ASSERT_EQ( true, file.groupExists( "/" ) ); // the root is always available
+	ASSERT_EQ( true, file.groupExists( "/short/path" ) );
+	ASSERT_EQ( true, file.groupExists( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" ) );
 }
