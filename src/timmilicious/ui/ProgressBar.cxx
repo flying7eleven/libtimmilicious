@@ -153,10 +153,10 @@ void ProgressBar::updateProgress() noexcept( false ) {
 
 	// calculate some important values
 	const float currentProgress = ( static_cast< float >( this->mCurrentProgress ) / static_cast< float >( this->mMaxProgress ) ) * 100.0f;
-	const unsigned short int timingColumns = this->mShowTimeEstimation ? 6 : 0;
-	const short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - this->mStatusText.length() - timingColumns; // progress indicator - bar indicator - number pct - status len
-	const unsigned short int progressDone = static_cast< unsigned short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
-	const unsigned short int progressNotDone = this->mProgressBarWidth - progressDone;
+	const short int timingColumns = this->mShowTimeEstimation ? 6 : 0;
+	const short int numberOfSpaces = terminalColumns - this->mProgressBarWidth - 2 - 5 - static_cast< short int >( this->mStatusText.length() ) - timingColumns; // progress indicator - bar indicator - number pct - status len
+	const short int progressDone = static_cast< short int >( currentProgress / ( 100.0f / this->mProgressBarWidth ) );
+	const short int progressNotDone = this->mProgressBarWidth - progressDone;
 
 	// show the text for the current status the user has set
 	fputs( this->mStatusText.c_str(), stdout );
@@ -209,7 +209,7 @@ void ProgressBar::updateProgress() noexcept( false ) {
 	}
 	// since there is not enough room for the progress bar, right-align the progress indicator instead
 	else {
-		const short int numberOfSpaces2 = terminalColumns - 5 - this->mStatusText.length(); // number pct - status len
+		const short int numberOfSpaces2 = terminalColumns - 5 - static_cast< short int >( this->mStatusText.length() ); // number pct - status len
 
 		// if there is even not enough room for that, throw an exception
 		if( unlikely( numberOfSpaces2 < 0 ) ) {
