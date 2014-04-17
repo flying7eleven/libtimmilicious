@@ -50,10 +50,35 @@ HDF5::~HDF5() noexcept {
 }
 
 bool HDF5::groupExists( const std::string & groupPath ) const noexcept {
-	if( H5Lexists( this->mFileId, groupPath.c_str(), H5P_DEFAULT ) != 0 ) {
+	std::vector< std::string > splittedPath;
+
+	// if the check is if the root path exists, just return true
+	if( unlikely( groupPath.length() == 1 && groupPath == "/" ) ) {
 		return true;
 	}
-	return false;
+
+	// split the supplied path into submodules
+	boost::algorithm::split( splittedPath, groupPath, boost::is_any_of( "/" ) );
+
+	// loop through the paths
+	boost::filesystem::path currentGroupPath( "/" );
+
+	//
+	for( std::vector< std::string >::const_iterator i = splittedPath.begin(); i != splittedPath.end(); ++i ) {
+		// skip the first (empty entry)
+		if( i->length() < 1 ) {
+			continue;
+		}
+
+		// check if the group exists, if not we can return false
+		currentGroupPath /= *i;
+		if( H5Lexists( this->mFileId, currentGroupPath.c_str(), H5P_DEFAULT ) == 0 ) {
+			return false;
+		}
+	}
+
+	// it seems that the path exists
+	return true;
 }
 
 #if 0
