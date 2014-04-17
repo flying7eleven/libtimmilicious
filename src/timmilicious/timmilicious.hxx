@@ -46,6 +46,15 @@
 	#error "It seems that the unlikely(x) marcro was defined previously. Check that before using libTimmilicous!"
 #endif
 
+/**
+ * Helper macro to align a class to specific memory boundaries without causing a warning about an unused variable.
+ */
+#if defined( __GNUC__ ) || defined( __clang__ )
+	#define ALIGN_CLASS( bytes ) char alignmentVariable[ bytes ] __attribute__( ( unused ) )
+#else
+	#define ALIGN_CLASS( bytes )
+#endif
+
 namespace timmilicious {
 
 	/**
