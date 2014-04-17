@@ -15,3 +15,62 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with libTimmilicious. If not, see <http://www.gnu.org/licenses/>.
  */
+#if !defined( __TIMMILICIOUS_IO_HDF5_HXX__ )
+	#define __TIMMILICIOUS_IO_HDF5_HXX__
+
+//
+#include <hdf5.h>
+#include <string>
+
+namespace timmilicious {
+
+	namespace io {
+
+		/**
+		 *
+		 */
+		class HDF5 {
+			public:
+				/**
+				 *
+				 * \param file
+				 * \param overwrite
+				 */
+				HDF5( const std::string & file, const bool & overwrite = false );
+
+				/**
+				 *
+				 */
+				virtual ~HDF5();
+
+				/**
+				 *
+				 * \param fileNameInContainer
+				 * \param imageFile
+				 * \param pathInsideHDF5
+				 */
+				void addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 = "/" );
+
+				/**
+				 *
+				 * \param groupPath
+				 */
+				void createGroup( const std::string & groupPath );
+
+				/**
+				 *
+				 * \param groupPath
+				 * \return
+				 */
+				bool groupExists( const std::string & groupPath ) const;
+
+			private:
+				hid_t mFileId; // << TODO
+
+		}; /* class HDF5 */
+
+	} /* namespace io */
+
+} /* namespace timmilicious */
+
+#endif /* if !defined( __TIMMILICIOUS_IO_HDF5_HXX__ ) */
