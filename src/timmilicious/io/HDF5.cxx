@@ -17,10 +17,10 @@
  */
 #include <timmilicious/timmilicious.hxx>
 #include <timmilicious/io/HDF5.hxx>
+using namespace timmilicious::io;
 
-#if 0
-#include <awesomeIO/ReaderFactory.h>
-#include <awesomeIO/iReader.h>
+// #include <awesomeIO/ReaderFactory.h>
+// #include <awesomeIO/iReader.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/path.hpp>
 
@@ -52,6 +52,7 @@ bool HDF5::groupExists( const std::string & groupPath ) const {
 	return false;
 }
 
+#if 0
 void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 ) {
 	hsize_t dims[ 2 ];
 	hid_t dataspace_id, adataspace_id, dataset_id, attribute_id;
@@ -132,6 +133,7 @@ void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::s
 	// close the opened group again
 	status = H5Gclose( groupId );
 }
+#endif
 
 void HDF5::createGroup( const std::string & groupPath ) {
 	std::vector< std::string > splittedPath;
@@ -157,5 +159,3 @@ void HDF5::createGroup( const std::string & groupPath ) {
 		}
 	}
 }
-
-#endif
