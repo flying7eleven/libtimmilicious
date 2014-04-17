@@ -35,7 +35,7 @@ SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/io/HDF5.hxx
 if( "${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" )
 	set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
 elseif ( "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
-	set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -pedantic -Weverything -pedantic-errors -Wno-c++98-compat" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -pedantic -Weverything -pedantic-errors -Wno-c++98-compat -Wno-c++98-compat-pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
 else()
 	message( FATAL_ERROR "You are using a non-supported compiler!" )
 endif()
