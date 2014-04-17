@@ -19,6 +19,7 @@
 	#define __TIMMILICIOUS_IO_HDF5_HXX__
 
 //
+#include <timmilicious/timmilicious.hxx>
 #include <hdf5.h>
 #include <string>
 

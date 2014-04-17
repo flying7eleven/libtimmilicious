@@ -19,6 +19,7 @@
 	#define __TIMMILICIOUS_UI_PROGRESSBAR_HXX__
 
 // include the required headers
+#include <timmilicious/timmilicious.hxx>
 #include <stdexcept>
 #include <string>
 #include <boost/thread/mutex.hpp>

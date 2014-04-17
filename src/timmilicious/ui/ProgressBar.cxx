@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with libTimmilicious. If not, see <http://www.gnu.org/licenses/>.
  */
-#include <timmilicious/timmilicious.hxx>
 #include <timmilicious/ui/ProgressBar.hxx>
 #include <boost/thread/lock_guard.hpp>
 #include <cstdio>

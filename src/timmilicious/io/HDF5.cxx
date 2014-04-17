@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with libTimmilicious. If not, see <http://www.gnu.org/licenses/>.
  */
-#include <timmilicious/timmilicious.hxx>
 #include <timmilicious/io/HDF5.hxx>
 using namespace timmilicious::io;
 
