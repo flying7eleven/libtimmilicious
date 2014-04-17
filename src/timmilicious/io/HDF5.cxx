@@ -167,6 +167,11 @@ void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::s
 void HDF5::createGroup( const std::string & groupPath ) noexcept {
 	std::vector< std::string > splittedPath;
 
+	// if the user wants to create the root element throw an exception
+	if( unlikely( groupPath.length() == 1 && groupPath == "/" ) ) {
+		throw std::invalid_argument( "The root element is always available and has not to be created." );
+	}
+
 	// split the supplied path into submodules
 	boost::algorithm::split( splittedPath, groupPath, boost::is_any_of( "/" ) );
 
