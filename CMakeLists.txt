@@ -33,9 +33,9 @@ SET( LIBTIMMI_HEADER_FILES ${LIBTIMMI_HEADER_FILES} src/timmilicious/io/HDF5.hxx
 
 # set flags to get clean code (at least on UNIX platforms)
 if( "${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" )
-	set( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -pedantic" CACHE STRING "Flags used by the compiler during all build types." FORCE )
 elseif ( "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
-	set( CMAKE_CXX_FLAGS "-Wall -Werror -pedantic -Weverything -pedantic-errors -std=c++11" CACHE STRING "Flags used by the compiler during all build types." FORCE )
+	set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -pedantic -Weverything -pedantic-errors -Wno-c++98-compat" CACHE STRING "Flags used by the compiler during all build types." FORCE )
 else()
 	message( FATAL_ERROR "You are using a non-supported compiler!" )
 endif()
