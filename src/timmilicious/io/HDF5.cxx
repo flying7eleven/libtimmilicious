@@ -23,7 +23,12 @@ using namespace timmilicious::io;
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/path.hpp>
 
-HDF5::HDF5( const std::string & file, const bool & overwrite ) noexcept {
+HDF5::HDF5( const std::string & file, const bool & overwrite ) noexcept( false ) {
+	// check if a valid path was supplied or not
+	if( file.length() <= 0 ) {
+		throw std::invalid_argument( "You have to supply a correct file path." );
+	}
+
 	// if we should overwrite the file, do so
 	if( overwrite ) {
 		this->mFileId = H5Fcreate( file.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT );

@@ -38,8 +38,10 @@ namespace timmilicious {
 				 *
 				 * \param[in] file The HDF5 file which should be opened or created.
 				 * \param[in] overwrite True if the file should be overwritten (if it exists), false if not.
+				 *
+				 * \throws std::invalid_argument Will be thrown if an invalid file path was supplied.
 				 */
-				HDF5( const std::string & file, const bool & overwrite = false ) noexcept;
+				HDF5( const std::string & file, const bool & overwrite = false ) noexcept( false );
 
 				/**
 				 * Destructor of this class.
