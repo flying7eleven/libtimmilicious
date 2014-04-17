@@ -24,7 +24,7 @@ using namespace timmilicious::io;
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/path.hpp>
 
-HDF5::HDF5( const std::string & file, const bool & overwrite ) {
+HDF5::HDF5( const std::string & file, const bool & overwrite ) noexcept {
 	// if we should overwrite the file, do so
 	if( overwrite ) {
 		this->mFileId = H5Fcreate( file.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT );
@@ -38,14 +38,14 @@ HDF5::HDF5( const std::string & file, const bool & overwrite ) {
 	}
 }
 
-HDF5::~HDF5() {
+HDF5::~HDF5() noexcept {
 	if( this->mFileId > -1 ) {
 		H5Fclose( this->mFileId );
 		this->mFileId = -1;
 	}
 }
 
-bool HDF5::groupExists( const std::string & groupPath ) const {
+bool HDF5::groupExists( const std::string & groupPath ) const noexcept {
 	if( H5Lexists( this->mFileId, groupPath.c_str(), H5P_DEFAULT ) != 0 ) {
 		return true;
 	}
@@ -53,7 +53,7 @@ bool HDF5::groupExists( const std::string & groupPath ) const {
 }
 
 #if 0
-void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 ) {
+void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 ) noexcept {
 	hsize_t dims[ 2 ];
 	hid_t dataspace_id, adataspace_id, dataset_id, attribute_id;
 	herr_t status;
@@ -135,7 +135,7 @@ void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::s
 }
 #endif
 
-void HDF5::createGroup( const std::string & groupPath ) {
+void HDF5::createGroup( const std::string & groupPath ) noexcept {
 	std::vector< std::string > splittedPath;
 
 	// split the supplied path into submodules

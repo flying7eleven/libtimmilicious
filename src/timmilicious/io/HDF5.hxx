@@ -38,19 +38,19 @@ namespace timmilicious {
 				 * \param[in] file The HDF5 file which should be opened or created.
 				 * \param[in] overwrite True if the file should be overwritten (if it exists), false if not.
 				 */
-				HDF5( const std::string & file, const bool & overwrite = false );
+				HDF5( const std::string & file, const bool & overwrite = false ) noexcept;
 
 				/**
 				 * Destructor of this class.
 				 */
-				virtual ~HDF5();
+				virtual ~HDF5() noexcept;
 
 				/**
 				 * Create a new group (path inside of the HDF5 file) for storing data.
 				 *
 				 * \param[in] groupPath The full path to the group which should be created.
 				 */
-				void createGroup( const std::string & groupPath );
+				void createGroup( const std::string & groupPath ) noexcept;
 
 				/**
 				 * Check if the supplied group (path inside of the HDF5 file) exists.
@@ -58,7 +58,7 @@ namespace timmilicious {
 				 * \param[in] groupPath The group to check.
 				 * \return True if the path exists, false if not.
 				 */
-				bool groupExists( const std::string & groupPath ) const;
+				bool groupExists( const std::string & groupPath ) const noexcept;
 
 			private:
 				hid_t mFileId; // << The internal handle to the opened HDF5 file.
