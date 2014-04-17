@@ -27,45 +27,43 @@ namespace timmilicious {
 	namespace io {
 
 		/**
-		 *
+		 * This class provides helper methods for accessing data inside of HDF5
+		 * container files.
 		 */
 		class HDF5 {
 			public:
 				/**
+				 * Create a new instance of this class.
 				 *
-				 * \param file
-				 * \param overwrite
+				 * \param[in] file The HDF5 file which should be opened or created.
+				 * \param[in] overwrite True if the file should be overwritten (if it exists), false if not.
 				 */
 				HDF5( const std::string & file, const bool & overwrite = false );
 
 				/**
-				 *
+				 * Destructor of this class.
 				 */
 				virtual ~HDF5();
 
 				/**
+				 * Create a new group (path inside of the HDF5 file) for storing data.
 				 *
-				 * \param fileNameInContainer
-				 * \param imageFile
-				 * \param pathInsideHDF5
-				 */
-				void addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 = "/" );
-
-				/**
-				 *
-				 * \param groupPath
+				 * \param[in] groupPath The full path to the group which should be created.
 				 */
 				void createGroup( const std::string & groupPath );
 
 				/**
+				 * Check if the supplied group (path inside of the HDF5 file) exists.
 				 *
-				 * \param groupPath
-				 * \return
+				 * \param[in] groupPath The group to check.
+				 * \return True if the path exists, false if not.
 				 */
 				bool groupExists( const std::string & groupPath ) const;
 
 			private:
-				hid_t mFileId; // << TODO
+				hid_t mFileId; // << The internal handle to the opened HDF5 file.
+
+				ALIGN_CLASS( 4 );
 
 		}; /* class HDF5 */
 
