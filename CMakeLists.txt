@@ -14,8 +14,9 @@ FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
 option( BUILD_TESTS "" OFF )
 if( BUILD_TESTS )
 	find_package( GTest REQUIRED )
-	add_executable( test_progressBar src/tests/progressBar.cxx )
-	target_link_libraries( test_progressBar timmilicious ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARY} )
+	add_executable( tests src/tests/progressBar.cxx src/tests/hdf5.cxx )
+	target_link_libraries( tests timmilicious ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARY} )
+	set_target_properties( tests PROPERTIES COMPILE_FLAGS "-std=c++11 -Wno-global-constructors" )
 endif( BUILD_TESTS )
 
 #
