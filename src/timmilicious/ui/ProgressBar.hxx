@@ -174,14 +174,15 @@ namespace timmilicious {
 				 */
 				unsigned short int getTerminalWidth( int fileDescriptor ) const noexcept;
 
-				std::string mStatusText; // <<< The current status text to use.
-				int mMaxProgress; // <<< The currently set max. progress value.
-				int mCurrentProgress; // <<< The current progress value.
-				short int mProgressBarWidth; // <<< The size of the progress indiciator.
-				boost::mutex mCurrentProgressValueMutex; // <<< The mutex to make the current progress thread-safe
-				bool mShowTimeEstimation; // <<< Should the time estimation be shown?
-				boost::timer::cpu_timer mProgressTimer; // <<< A timer used for estimating the runtime.
-				boost::timer::cpu_times mTimePerElementRequired; // <<< The variable which stores the estimated time per element required.
+				int mMaxProgress; // << The currently set max. progress value.
+				int mCurrentProgress; // << The current progress value.
+				std::string mStatusText; // << The current status text to use.
+				boost::timer::cpu_timer mProgressTimer; // << A timer used for estimating the runtime.
+				boost::timer::cpu_times mTimePerElementRequired; // << The variable which stores the estimated time per element required.
+				boost::mutex mCurrentProgressValueMutex; // << The mutex to make the current progress thread-safe
+				short int mProgressBarWidth; // << The size of the progress indiciator.
+				bool mShowTimeEstimation; // << Should the time estimation be shown?
+				ALIGN_CLASS( 5 );
 
 		}; /* class ProgressBar */
 
