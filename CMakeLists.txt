@@ -8,7 +8,8 @@ SET( TIMMI_LIB_SOVERSION "2" ) # should just be changed if the ABI changes
 SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake" )
 
 # find and configure the required libraries
-FIND_PACKAGE( Boost COMPONENTS system thread timer REQUIRED )
+FIND_PACKAGE( Boost COMPONENTS system thread timer filesystem REQUIRED )
+FIND_PACKAGE( HDF5 REQUIRED )
 
 #
 option( BUILD_TESTS "" OFF )
@@ -76,7 +77,7 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/dist/arch/PKGBUILD.in" "${PROJECT_SOURCE_
 
 # specify how to build the library
 ADD_LIBRARY( timmilicious SHARED ${LIBTIMMI_SOURCE_FILES} ${LIBTIMMI_HEADER_FILES} ) 
-TARGET_LINK_LIBRARIES( timmilicious ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES( timmilicious ${Boost_LIBRARIES} ${HDF5_LIBRARIES} )
 SET_TARGET_PROPERTIES( timmilicious PROPERTIES VERSION ${VERSION_SHORT} SOVERSION ${TIMMI_LIB_SOVERSION} )
 
 # build the testing application
