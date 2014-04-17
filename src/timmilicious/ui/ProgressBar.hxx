@@ -166,7 +166,7 @@ namespace timmilicious {
 				/**
 				 * Get the current width of the terminal.
 				 *
-				 * \param[in] fileDesciptor The file descriptor of the terminal to query.
+				 * \param[in] fileDescriptor The file descriptor of the terminal to query.
 				 *
 				 * \return The width (in character counts) for the specified terminal.
 				 *
