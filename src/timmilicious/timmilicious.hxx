@@ -23,7 +23,7 @@
  * the code and therefore the speed of the execution.
  */
 #if !defined( likely )
-	#if defined( __GNUC__ )
+	#if defined( __GNUC__ ) || defined( __clang__ )
 		#define likely( x ) __builtin_expect( !!( x ), 1 )
 	#else
 		#define likely( x ) x
@@ -37,7 +37,7 @@
  * the code and therefore the speed of the execution.
  */
 #if !defined( unlikely )
-	#if defined( __GNUC__ )
+	#if defined( __GNUC__ ) || defined( __clang__ )
 		#define unlikely( x ) __builtin_expect( !!( x ), 0 )
 	#else
 		#define unlikely( x ) x
