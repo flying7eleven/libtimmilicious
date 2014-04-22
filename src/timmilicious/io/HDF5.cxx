@@ -157,9 +157,9 @@ void HDF5::addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5
 void HDF5::createGroup( const std::string & groupPath ) noexcept {
 	std::vector< std::string > splittedPath;
 
-	// if the user wants to create the root element throw an exception
+	// if the user wants to create the root element, just skip this step
 	if( unlikely( groupPath.length() == 1 && groupPath == "/" ) ) {
-		throw std::invalid_argument( "The root element is always available and has not to be created." );
+		return;
 	}
 
 	// split the supplied path into submodules
