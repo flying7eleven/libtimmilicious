@@ -20,6 +20,7 @@
 
 //
 #include <timmilicious/timmilicious.hxx>
+#include <opencv2/opencv.hpp>
 #include <hdf5.h>
 #include <string>
 
@@ -62,6 +63,15 @@ namespace timmilicious {
 				 * \return True if the path exists, false if not.
 				 */
 				bool groupExists( const std::string & groupPath ) const noexcept;
+
+				/**
+				 * Adds an OpenCV matrix to the HDF5 container.
+				 *
+				 * \param[in] matrix The matrix to add to the container file.
+				 * \param[in] pathInsideHDF5 The path inside of the container.
+				 * \param[in] fileNameInContainer The name of the matrix inside of the container file.
+				 */
+				void addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5, const std::string & fileNameInContainer ) noexcept;
 
 			private:
 				hid_t mFileId; // << The internal handle to the opened HDF5 file.

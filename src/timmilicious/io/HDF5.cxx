@@ -81,6 +81,79 @@ bool HDF5::groupExists( const std::string & groupPath ) const noexcept {
 	return true;
 }
 
+void HDF5::addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5, const std::string & fileNameInContainer ) noexcept {
+	hsize_t dims[ 2 ];
+	hid_t dataspace_id, adataspace_id, dataset_id, attribute_id;
+	herr_t status;
+	hsize_t adims = 1;
+	bool threeChan = false;
+
+	// check if the group already exists, of not create it
+	if( !this->groupExists( pathInsideHDF5 ) ) {
+		this->createGroup( pathInsideHDF5 );
+	}
+
+	// check which native type should be used
+	int nativeType = H5T_STD_REF_OBJ;
+	switch( matrix.type() ) {
+		case CV_8U:
+			nativeType = H5T_STD_U8LE;
+			threeChan = false;
+			break;
+		case CV_8S:
+			nativeType = H5T_STD_I8LE;
+			threeChan = false;
+			break;
+		case CV_8UC3: // 8 bit RGB
+			nativeType = H5T_STD_U8LE;
+			threeChan = true;
+			break;
+		default:
+			std::cerr << "ERROR: Image type is unkown: " << matrix.type() << std::endl; // TODO: better error handling
+	}
+
+	// create the data space for the dataset
+	dims[ 0 ] = static_cast< hsize_t >( matrix.rows );
+	dims[ 1 ] = static_cast< hsize_t >( matrix.cols * ( threeChan ? 3 : 1 ) );
+	dataspace_id = H5Screate_simple( 2, dims, NULL );
+
+	// open the requested group
+	hid_t groupId = H5Gopen( this->mFileId, pathInsideHDF5.c_str(), H5P_DEFAULT );
+
+	// create the dataset
+	dataset_id = H5Dcreate2( groupId, fileNameInContainer.c_str(), nativeType, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT );
+
+	//
+	status = H5Dwrite( dataset_id, nativeType, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT, matrix.ptr() );
+
+	// determine the value for the attribute which indicates if it is a color image or not
+	unsigned char colorImageFlag = threeChan ? 1 : 0;
+
+	// create the type of the attribute
+	adataspace_id = H5Screate_simple( 1, &adims, NULL );
+
+	// define the name and type of the attribute
+	attribute_id = H5Acreate2( dataset_id, "ColorImage", H5T_STD_U8LE, adataspace_id, H5P_DEFAULT, H5P_DEFAULT );
+
+	// write the attribute value to the file
+	status = H5Awrite( attribute_id, H5T_NATIVE_UCHAR, &colorImageFlag );
+
+	// close the attribute itself
+	status = H5Aclose( attribute_id );
+
+	// close the data space used for the attribute
+	status = H5Sclose( adataspace_id );
+
+	// end access to the dataset and release resources used by it.
+	status = H5Dclose( dataset_id );
+
+	// terminate access to the data space.
+	status = H5Sclose( dataspace_id );
+
+	// close the opened group again
+	status = H5Gclose( groupId );
+}
+
 #if 0
 void HDF5::addImageToHDF5( const std::string & fileNameInContainer, const std::string & imageFile, const std::string & pathInsideHDF5 ) noexcept {
 	hsize_t dims[ 2 ];
