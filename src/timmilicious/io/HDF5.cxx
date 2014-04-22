@@ -127,16 +127,16 @@ void HDF5::addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5
 	status = H5Dwrite( dataset_id, nativeType, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT, matrix.ptr() );
 
 	// determine the value for the attribute which indicates if it is a color image or not
-	unsigned char colorImageFlag = threeChan ? 1 : 0;
+	const int32_t matrixType = matrix.type();
 
 	// create the type of the attribute
 	adataspace_id = H5Screate_simple( 1, &adims, NULL );
 
 	// define the name and type of the attribute
-	attribute_id = H5Acreate2( dataset_id, "ColorImage", H5T_STD_U8LE, adataspace_id, H5P_DEFAULT, H5P_DEFAULT );
+	attribute_id = H5Acreate2( dataset_id, "MatrixType", H5T_STD_I32LE, adataspace_id, H5P_DEFAULT, H5P_DEFAULT );
 
 	// write the attribute value to the file
-	status = H5Awrite( attribute_id, H5T_NATIVE_UCHAR, &colorImageFlag );
+	status = H5Awrite( attribute_id, H5T_NATIVE_UCHAR, &matrixType );
 
 	// close the attribute itself
 	status = H5Aclose( attribute_id );
