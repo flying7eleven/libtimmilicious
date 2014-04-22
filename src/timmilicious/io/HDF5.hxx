@@ -21,8 +21,10 @@
 //
 #include <timmilicious/timmilicious.hxx>
 #include <opencv2/opencv.hpp>
+#include <boost/any.hpp>
 #include <hdf5.h>
 #include <string>
+#include <map>
 
 namespace timmilicious {
 
@@ -72,6 +74,14 @@ namespace timmilicious {
 				 * \param[in] fileNameInContainer The name of the matrix inside of the container file.
 				 */
 				void addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5, const std::string & fileNameInContainer ) noexcept;
+
+				/**
+				 * Get the attributes for a file inside of the HDF5 container.
+				 *
+				 * \param[in] filenameInsideHDF5 The file inside of the HDF5 container
+				 * \return A vector of attributes found for the supplied file.
+				 */
+				std::map< std::string, boost::any > getAttributes( const std::string & filenameInsideHDF5 ) noexcept;
 
 			private:
 				hid_t mFileId; // << The internal handle to the opened HDF5 file.

@@ -81,6 +81,59 @@ bool HDF5::groupExists( const std::string & groupPath ) const noexcept {
 	return true;
 }
 
+std::map< std::string, boost::any > HDF5::getAttributes( const std::string & filenameInsideHDF5 ) noexcept {
+	std::map< std::string, boost::any > returnVector;
+	char attributeNameBuffer[ 256 ];
+
+	// if the object does not exists, return the empty vector
+	if( !this->groupExists( filenameInsideHDF5 ) ) {
+		return returnVector;
+	}
+
+	// try to open the dataset, if it won't work return an empty vector
+	hid_t dataset = H5Dopen( this->mFileId, filenameInsideHDF5.c_str(), H5P_DEFAULT );
+	if( dataset < 0 ) {
+		return returnVector;
+	}
+
+	// get the number of attributes for the dataset
+	const int numberOfAttributes = H5Aget_num_attrs( dataset );
+
+	// fetch the info for all attributes
+	for( int i = 0; i < numberOfAttributes; ++i ) {
+
+		// try to open the corresponding attribute
+		hid_t attributeId = H5Aopen_by_idx( dataset, ".", H5_INDEX_CRT_ORDER, H5_ITER_INC, static_cast< hsize_t >( i ), H5P_DEFAULT, H5P_DEFAULT );
+		if( attributeId < 0 ) {
+			H5Dclose( dataset );
+			return returnVector;
+		}
+
+		// try to get the name of the attribute
+		ssize_t lengthOfName = H5Aget_name( attributeId, 256, attributeNameBuffer );
+		if( lengthOfName <= 0 ) {
+			H5Aclose( attributeId );
+			H5Dclose( dataset );
+			return returnVector;
+		}
+
+		// read the value of the attribute
+		// TODO: this
+		
+		// close the opened attribute again
+		H5Aclose( attributeId );
+
+		// but the gathered information into the return map
+		returnVector.insert( std::make_pair( std::string( attributeNameBuffer ), filenameInsideHDF5 ) );
+	}
+
+	// close the opened dataset
+	H5Dclose( dataset );
+
+	// return the found attributes
+	return returnVector;
+}
+
 void HDF5::addMatrix( const cv::Mat & matrix, const std::string & pathInsideHDF5, const std::string & fileNameInContainer ) noexcept {
 	hsize_t dims[ 2 ];
 	hid_t dataspace_id, adataspace_id, dataset_id, attribute_id;
