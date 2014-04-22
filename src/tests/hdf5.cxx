@@ -52,3 +52,23 @@ TEST( HDF5, groupExists ) {
 	ASSERT_EQ( true, file.groupExists( "/short/path" ) );
 	ASSERT_EQ( true, file.groupExists( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" ) );
 }
+
+TEST( HDF5, addMatrix ) {
+	HDF5 file( HDF5_TEST_FILE_PATH, true );
+
+	// since the prev. test ran correct, we're sure that the following two calls will work
+	file.createGroup( "/short/path" );
+	file.createGroup( "/this/is/a/longer/test/path/inside/of/the/hdf5/file" );
+
+	//
+	cv::Mat M( 1024, 1024, CV_8U, cv::Scalar( 0, 255 ) );
+	ASSERT_NO_THROW( file.addMatrix( M, "/", "testMat00" ) );
+	ASSERT_NO_THROW( file.addMatrix( M, "/short/path", "testMat01" ) );
+	ASSERT_NO_THROW( file.addMatrix( M, "/this/is/a/longer/test/path/inside/of/the/hdf5/file", "testMat02" ) );
+
+	//
+	cv::Mat M2( 1024, 1024, CV_8UC3, cv::Scalar( 0, 255 ) );
+	ASSERT_NO_THROW( file.addMatrix( M2, "/", "testMat03" ) );
+	ASSERT_NO_THROW( file.addMatrix( M2, "/short/path", "testMat04" ) );
+	ASSERT_NO_THROW( file.addMatrix( M2, "/this/is/a/longer/test/path/inside/of/the/hdf5/file", "testMat05" ) );
+}
